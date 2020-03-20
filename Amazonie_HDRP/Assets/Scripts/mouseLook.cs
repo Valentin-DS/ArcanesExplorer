@@ -11,9 +11,7 @@ public class mouseLook : MonoBehaviour
 
     float xRotation = 0f;
     public static bool hitsmthg = false;
-    public static bool ChoixPosition = false;
     public static RaycastHit objectHitName;
-    public static RaycastHit TerrainRaycastHit;
     private float startTime;
     private float journeyLength;
     public GameObject laser;
@@ -27,23 +25,13 @@ public class mouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int layerMaskGround = 1 << 10;
         int layerMask = 1 << 11;
         int layerMaskTemple = 1 << 12;
 
         RaycastHit hit;
-        RaycastHit hit2;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskGround))
-        {
-            TerrainRaycastHit = hit;
-            ChoixPosition = true;
-        }
-
-        //Raycasts terrain/objet
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMask)){
             hitsmthg = true;
-            objectHitName = hit;
+            objectHitName = hit;         
         }
         else
         {
@@ -59,6 +47,7 @@ public class mouseLook : MonoBehaviour
             {
                 if(GameObject.Find("StartLaser(Clone)") == null)
                 {
+                    hit.transform.GetComponent<Animation>().Play();
                     Instantiate(laser);
                 }
             }

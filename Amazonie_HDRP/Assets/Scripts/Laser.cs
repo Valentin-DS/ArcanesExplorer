@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour
     public int maxReflectionCount = 5;
     public float maxStepDistance = 25;
 
+    public GameObject porte;
     private bool launchingDraw = false;
     public List<Vector3> test = new List<Vector3>();
 
@@ -26,6 +27,7 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        porte = GameObject.Find("Temple_Porte");
         lineRenderer = GetComponent<LineRenderer>();
         test.Add(this.transform.position);
         lineRenderer.SetPosition(0, test[0]);
@@ -65,6 +67,7 @@ public class Laser : MonoBehaviour
                     if (distanceFinal < 1.5f)
                     {
                         Debug.Log("Vous avez gagné : Lancer l'animation");
+                        porte.GetComponent<Animation>().Play();
                     }
                     else
                     {
