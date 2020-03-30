@@ -1,24 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/**
+ * @class RotationColumn
+ * La classe RotationColumn permet d'exercer une rotation sur une colonne, dans la première salle du temple
+ * @author Basile
+ */
 public class RotationColumn : MonoBehaviour
 {
+    /**
+     * Booléen déterminant si la rotation est effectuée ou non
+     */
     public static bool rotationStart = false;
+    /**
+     * Rotation cible
+     */
     public static Vector3 targetAngle;
+    /**
+     * Rotation initiale
+     */
     private static Vector3 currentAngle;
+    /**
+     * Composant transform de la colonne
+     */
     public static Transform m_transform;
+    /**
+     * Vitesse de rotation de la colonne
+     */
     public float speed = 0.02f;
-    private static bool call_function = true;
-    // Start is called before the first frame update
+    /**
+     * Booléen déterminant si la fonction de rotation a été appellée
+     */
+    public static bool call_function = true;
+    /**
+     * Initialisation des paramètres
+     */
     void Start()
     {
         m_transform = this.transform;
         currentAngle = transform.eulerAngles;
         targetAngle = new Vector3(currentAngle.x, (currentAngle.y + 90), currentAngle.z);
     }
-
-    // Update is called once per frame
+    /**
+     * Boucle principale de RotationColumn
+     */
     void Update()
     {
         if (rotationStart)
@@ -34,6 +58,10 @@ public class RotationColumn : MonoBehaviour
         }
         
     }
+    /**
+     * Méthode permettant d'exercer la rotation sur la colonne
+     * @param Nom de la colonne
+     */
     public static void startRotation(string name)
     {
         m_transform = GameObject.Find(name).GetComponent<Transform>();

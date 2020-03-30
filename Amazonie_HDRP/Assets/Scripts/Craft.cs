@@ -2,21 +2,57 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * @class Craft
+ * La classe Craft permet de régir l'ensemble du système de craft : Renseigne tous les objets disponibles et fait le lien entre les données de l'inventaire du joueur et l'interface de craft
+ * @author Valentin
+ */
 public class Craft : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /**
+     * Liste des modèles 3D renseignés en champ sérialisé
+     */
     [SerializeField]
     private List<GameObject> GameObjectsCraft;
+    /**
+     * Texte des objets renseignés en champ sérialisé faisant référence à l'interface de craft
+     */
     [SerializeField]
     private List<Text> TexteObjets;
+    /**
+     * Interface de craft
+     */
     [SerializeField]
     private Canvas CraftCanvas;
+    /**
+     * Position de la flèche de choix d'objet à crafter dans l'interface de craft
+     */
     [SerializeField]
     private RectTransform FlecheTransform;
+    /**
+     * Liste d'objets de la classe ObjetCraftable permettant de lier au modèle 3D d'autres données spécifiques
+     */
     private List<ObjetCraftable> ObjetsCraftables;
+    /**
+     * Index permettant de naviguer dans les listes
+     * @see List<GameObject> GameObjectsCraft
+     * @see List<ObjetCraftable> ObjetsCraftables
+     */
     private int NavigationIndex;
+    /**
+     * Booléen déterminant si l'objet est crafté ou non
+     */
     private bool ObjetCrafte;
+    /**
+     * Booléen déterminant si l'objet est placé ou non
+     */
     private bool ObjetPlace;
+
+    /**
+     * Initialisation des paramètres
+     * @see List<ObjetCraftable> ObjetsCraftables
+     * @see int NavigationIndex
+     */
     void Start()
     {
         ObjetPlace = false;
@@ -35,7 +71,9 @@ public class Craft : MonoBehaviour
         NavigationIndex = 0;
     }
 
-    // Update is called once per frame
+    /**
+     * Boucle principale de Craft : gère la navigation dans l'interface, le choix, le placement, et la validation
+     */
     void Update()
     {
         if (CraftCanvas.enabled)
@@ -92,6 +130,10 @@ public class Craft : MonoBehaviour
         }
     }
 
+    /**
+     * Méthode permettant de vérifier si le joueur a suffisament d'ingrédients pour crafter l'objet demandé
+     * @param objetACrafter : Objet demandé par le joueur
+     */
     private bool VerifieIngredients(ObjetCraftable objetACrafter)
     {
         bool peutCrafter = true;
@@ -121,6 +163,10 @@ public class Craft : MonoBehaviour
         return peutCrafter;
     }
 
+    /**
+     * Méthode permettant de vérifier si les 4 socles de l'objet touchent bien le sol
+     * @see CollisionSocle
+     */
     private bool VerifiePlacement()
     {
         bool placementValide = true;
@@ -136,6 +182,11 @@ public class Craft : MonoBehaviour
         return placementValide;
     }
 
+    /**
+     * Méthode permettant de retirer de l'inventaire les ingrédients nécessaires pour crafter l'objet demandé
+     * @param objetACrafter : Objet demandé par le joueur
+     * @see bool VerifieIngredients(ObjetCraftable objetACrafter)
+     */
     private void RetireIngredients(ObjetCraftable objetACrafter)
     {
         foreach (KeyValuePair<string, int> ingredient in objetACrafter.Recette)

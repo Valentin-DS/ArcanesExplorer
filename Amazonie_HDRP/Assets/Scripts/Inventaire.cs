@@ -1,27 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
+/**
+ * @class Inventaire
+ * La classe Inventaire permet de gérer l'inventaire, de faire le lien entre les données et l'interface d'inventaire
+ * @author Basile
+ * */
 public class Inventaire : MonoBehaviour
 {
-    //Dictionnaire liant un objet à sa quantité
+    /**
+     * Dictionnaire liant un objet à sa quantité
+     */
     public static Dictionary<string, int> listeObjets = new Dictionary<string, int>();
-
-    //Nombre d'objets maximum
+   /**
+    * Nombre d'objets maximum
+    */
     public static int nbObjetMax = 4;
-
-    //Nombre d'objets actuels
+    /**
+     * Nombre d'objets actuels
+     */
     public static int nbObjetsActuels = 0;
-
-    //Canvas pour afficher l'inventaire
+    /**
+     * Canvas pour afficher l'inventaire (en champ serialisé)
+     */
     [SerializeField] GameObject inventaireCanvas;
-
-    //Liste des objets Texte affichant le nombre d'objets
+    /**
+     * Liste des objets Texte affichant le nombre d'objets (en champ sérialisé)
+     */
     [SerializeField] List<TextMeshProUGUI> listeTextSlot;
-
-    //Ajoute l'objet cliqué à l'inventaire
+    /**
+     * Ajoute l'objet cliqué à l'inventaire
+     * @param Nom de l'objet à ajouter
+     */
     public static void ajoutItem(string nomObjet)
     {
         //Vérifie si l'objet n'est pas déjà dans l'inventaire
@@ -47,7 +58,9 @@ public class Inventaire : MonoBehaviour
             listeObjets[nomObjet] += 1;
         }
     }
-
+    /**
+     * Boucle principale d'Inventaire
+     */
     private void Update()
     {
         //Vérifie quand le joueur ouvre l'inventaire
@@ -56,8 +69,9 @@ public class Inventaire : MonoBehaviour
             enableUI();
         }
     }
-
-    //Fonction gérant l'ouverture de l'inventaire avec le Canvas 
+    /**
+     * Methode gérant l'ouverture de l'inventaire avec le Canvas 
+     */
     public void enableUI()
     {
         if (inventaireCanvas.activeSelf)
@@ -70,9 +84,10 @@ public class Inventaire : MonoBehaviour
             loadingInventaire();
 
         }
-    }
-    
-    //Charge l'inventaire
+    }  
+    /**
+     * Méthode permettant de charger l'inventaire
+     */
     public void loadingInventaire()
     {
         for(int j=0;j<nbObjetsActuels; j++)
