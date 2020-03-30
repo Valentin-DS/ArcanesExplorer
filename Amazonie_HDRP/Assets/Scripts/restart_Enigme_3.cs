@@ -5,15 +5,15 @@ using UnityEngine;
 public class restart_Enigme_3 : MonoBehaviour
 {
     public List<GameObject> liste_Dalles = new List<GameObject>();
-    public Transform restart_Pos;
+    public GameObject restart_Pos;
+    public GameObject player;
+    public GameObject player_Prefab;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {        
         reload_Dalle(other);
-        Debug.Log("te");
-        other.GetComponent<Transform>().Translate(restart_Pos.position);
-        Debug.Log("ete");
+        
     }
     private void reload_Dalle(Collider other)
     {
@@ -21,5 +21,8 @@ public class restart_Enigme_3 : MonoBehaviour
         {
             liste_Dalles[i].SetActive(true);
         }
+        Destroy(other.gameObject);
+        Instantiate(player_Prefab, restart_Pos.transform.position, restart_Pos.transform.rotation, null);
     }
+
 }

@@ -123,7 +123,7 @@ public class mouseLook : MonoBehaviour
             {
                 RotationColumn.startRotation(hit.transform.name);
             }
-            else if (Input.GetKeyDown(KeyCode.R) && hit.transform.name == "Levier")
+            else if (Input.GetKeyDown(KeyCode.R) && hit.transform.name == "Levier" && RotationColumn.call_function)
             {
                 if (GameObject.Find("StartLaser(Clone)") == null)
                 {
