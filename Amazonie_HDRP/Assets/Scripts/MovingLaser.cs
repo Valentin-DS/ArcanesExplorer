@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/**
+ * @warning Cette classe semble être un doublon de Laser : L'utiliser ou la supprimer
+ */
 public class MovingLaser : MonoBehaviour
 {
     private LineRenderer lineRenderer;

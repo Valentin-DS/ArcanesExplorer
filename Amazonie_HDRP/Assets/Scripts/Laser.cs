@@ -1,30 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * @class Laser
+ * La classe Laser permet de gérer le déclenchement d'un laser (et le lancement de l'animation d'ouverture de la porte dans la première salle du temple notamment)
+ * @author Basile
+ * */
 public class Laser : MonoBehaviour
 {
+    /**
+     * Nombre de réflexions du laser
+     */
     public int maxReflectionCount = 5;
+    /**
+     * Distance maximale du laser
+     */
     public float maxStepDistance = 25;
-
+    /**
+     * Objet porte sur lequel l'animation va être déclenchée
+     */
     public GameObject porte;
+    /**
+     * Booléen indiquant si le laser doit être déclenché ou non
+     */
     private bool launchingDraw = false;
+    /**
+     * Coordonnées du laser
+     * @todo Renommer la variable
+     */
     public List<Vector3> test = new List<Vector3>();
-
+    /**
+     * Coordonnée de fin du laser, le point qu'il doit atteindre
+     */
     public Vector3 finishLaser = new Vector3(-5.44f, 8.29f, 11.3f);
+    /**
+     * Coordonée d'origine du laser (colonne)
+     */
     private Vector3 origin;
+    /**
+     * Coordonnée cible du laser (colonne)
+     */
     private Vector3 target;
-
+    /**
+     * Rendu graphique du laser
+     */
     private LineRenderer lineRenderer;
-
+    /**
+     * Distance entre deux colonnes reliées par le laser
+     * @see Vector3 origin
+     * @see Vector3 target
+     */
     private float dist;
+    /**
+     * Compteur de progression de la distance parcourue par le laser entre deux colonnes
+     */
     private float counter;
-
+    /**
+     * Vitesse du rendu graphique du laser
+     */
     public float lineDrawSpeed = 6f;
+    /**
+     * Compteur du nombre de réflexions du laser
+     * @see int maxReflectionCount
+     */
     private int wayPointIndex = 0;
+    /**
+     * Distance séparant une réflexion d'une autre
+     */
     private float nextPoint;
 
-    // Start is called before the first frame update
+    /**
+     * Initialisation des paramètres
+     */
     void Start()
     {
         porte = GameObject.Find("Temple_Porte");
@@ -34,9 +81,12 @@ public class Laser : MonoBehaviour
         DrawPredictedReflectionsPattern(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, maxReflectionCount);
     }
 
-    // Update is called once per frame
+    /**
+     * Boucle principale de Laser
+     */
     void Update()
     {
+        Debug.Log(nextPoint);
         if (launchingDraw)
         {
             counter += 0.1f / lineDrawSpeed * Time.deltaTime;
@@ -80,6 +130,12 @@ public class Laser : MonoBehaviour
         }   
     }
 
+    /**
+     * Méthode permettant de tracer le laser d'une réflexion à une autre
+     * @param position : Position initiale du laser
+     * @param direction : Position finale du laser
+     * @param reflectionRemaining : Nombre de réflexions restantes
+     */
     void DrawPredictedReflectionsPattern(Vector3 position, Vector3 direction, int reflectionRemaining)
     {
         if(reflectionRemaining == 0)
@@ -123,6 +179,9 @@ public class Laser : MonoBehaviour
         DrawPredictedReflectionsPattern(position, direction, reflectionRemaining - 1);
     }
 
+    /**
+     * Méthode permettant de définir le prochain point à atteindre
+     */
     private void GetNextWayPoint()
     {
         counter = 0;
@@ -136,6 +195,10 @@ public class Laser : MonoBehaviour
             lineRenderer.SetPosition(i, origin);
         }
     }
+
+    /**
+     * Méthode permettant de supprimer le laser
+     */
     void endLaser()
     {
         lineRenderer.enabled = false;

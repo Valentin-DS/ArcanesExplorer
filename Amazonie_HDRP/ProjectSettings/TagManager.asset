@@ -25,9 +25,9 @@ TagManager:
   - CollectableObject
   - ActivableObject
   - Wall
-  - 
-  - 
-  - 
+  - RegenFaim
+  - RegenSoif
+  - RegenSommeil
   - 
   - 
   - 

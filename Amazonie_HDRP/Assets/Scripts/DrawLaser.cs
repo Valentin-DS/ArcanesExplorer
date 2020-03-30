@@ -1,9 +1,13 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
+/**
+ * @class DrawLaser
+ * Pas suffisament d'informations sur la classe DrawLaser
+ * @todo 
+ * Assigner la classe et la documenter, sinon la supprimer
+ * @author Basile
+ */
 public class DrawLaser : MonoBehaviour
 {
     public GameObject laserPrefab;
