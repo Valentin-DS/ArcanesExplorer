@@ -34945,8 +34945,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142194053}
-  - component: {fileID: 2142194054}
   - component: {fileID: 2142194055}
+  - component: {fileID: 2142194054}
   m_Layer: 0
   m_Name: ObjetsCraftables
   m_TagString: Untagged
@@ -34980,7 +34980,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2142194052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3fa4420fddb0d42a108f58d22ca591, type: 3}
+  m_Script: {fileID: 11500000, guid: 572f48da8bf17164b9b2357c71f5fa6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameObjectsCraft:
@@ -34991,7 +34991,6 @@ MonoBehaviour:
   - {fileID: 1223807547}
   CraftCanvas: {fileID: 1486570137}
   FlecheTransform: {fileID: 568416854}
-  ObjetsCraftables: []
 --- !u!114 &2142194055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35323,6 +35322,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3066077738874411522, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
+        type: 3}
+      propertyPath: craftCanvas
+      value: 
+      objectReference: {fileID: 1486570137}
+    - target: {fileID: 3066077738874411522, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
+        type: 3}
+      propertyPath: torchePrefab
+      value: 
+      objectReference: {fileID: 5513334452733150561, guid: 624e2495604577241b86c4ec9e249660,
+        type: 3}
     - target: {fileID: 3066077738874411521, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
         type: 3}
       propertyPath: inventaireCanvas
@@ -35348,11 +35358,6 @@ PrefabInstance:
       propertyPath: listeTextSlot.Array.data[3]
       value: 
       objectReference: {fileID: 3548715}
-    - target: {fileID: 3066077738874411522, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
-        type: 3}
-      propertyPath: craftCanvas
-      value: 
-      objectReference: {fileID: 1486570137}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 225ec816322178e4a9b7ddf87a3e4bc4, type: 3}
 --- !u!33 &3398871651151142695

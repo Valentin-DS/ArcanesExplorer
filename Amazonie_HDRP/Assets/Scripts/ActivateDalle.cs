@@ -12,7 +12,7 @@ public class ActivateDalle : MonoBehaviour
     {
         if (this.transform.tag != "activableDalle")
         {
-            Invoke("destroyDalle", 1);
+            Invoke("destroyDalle", 0.1f);
         }
         else
         {
@@ -21,6 +21,6 @@ public class ActivateDalle : MonoBehaviour
     }
     private void destroyDalle()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

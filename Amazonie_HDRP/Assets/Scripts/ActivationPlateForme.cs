@@ -7,7 +7,7 @@ public class ActivationPlateForme : MonoBehaviour
     private float startTime;
     private float journeyLength;
     public List<Transform> endpoint = new List<Transform>();
-    public float speed = 1f;
+    public float speed;
     private bool activatePlate = false;
 
     private int index = 0;
@@ -37,17 +37,16 @@ public class ActivationPlateForme : MonoBehaviour
                 else
                 {
                     activatePlate = false;
-                    
                 }
             }
-           
         }
     }
     private void loadNextPoint()
     {
+        startTime = Time.time;
         index++;
+        journeyLength = Vector3.Distance(this.transform.position, endpoint[index].position);
         activatePlate = true;
-
     }
     private void OnTriggerEnter(Collider other)
     {
