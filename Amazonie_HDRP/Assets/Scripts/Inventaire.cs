@@ -64,7 +64,7 @@ public class Inventaire : MonoBehaviour
     private void Update()
     {
         //Vérifie quand le joueur ouvre l'inventaire
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Exploration")
         {
             enableUI();
         }
