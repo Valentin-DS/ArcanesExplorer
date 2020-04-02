@@ -37,12 +37,6 @@ public class ActivationPlateForme : MonoBehaviour
      * Distance entre la position courante du joueur et la prochaine position qu'il doit atteindre
      */
     private float distance;
-    private AudioSource BruitagePlateforme;
-
-    private void Start()
-    {
-        BruitagePlateforme = GetComponent<AudioSource>();
-    }
 
     /**
      * Boucle principale d'ActivationPlateForme
@@ -91,7 +85,6 @@ public class ActivationPlateForme : MonoBehaviour
     {
         if (index == 0)
         {
-            BruitagePlateforme.Play();
             startTime = Time.time;
 
             journeyLength = Vector3.Distance(this.transform.position, endpoint[index].position);
