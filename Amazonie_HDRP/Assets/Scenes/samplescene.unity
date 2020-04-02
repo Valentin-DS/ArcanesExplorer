@@ -5900,7 +5900,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -35256,6 +35256,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3066077738874411645, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Exploration
+      objectReference: {fileID: 0}
     - target: {fileID: 3066077738874411520, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -35341,6 +35346,11 @@ PrefabInstance:
       propertyPath: listeTextSlot.Array.data[3]
       value: 
       objectReference: {fileID: 3548715}
+    - target: {fileID: 3066077737821581875, guid: 225ec816322178e4a9b7ddf87a3e4bc4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Exploration
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 225ec816322178e4a9b7ddf87a3e4bc4, type: 3}
 --- !u!33 &3067635549471576249
