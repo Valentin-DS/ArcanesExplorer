@@ -57,6 +57,7 @@ public class mouseLook : MonoBehaviour
      * Objet correspondant au laser de la première salle du temple
      */
     public GameObject laser;
+    private AudioSource BruitageRotationColonne;
 
     /**
      * Initialisation des paramètres
@@ -65,6 +66,7 @@ public class mouseLook : MonoBehaviour
     {
         startTime = Time.time;
         Cursor.lockState = CursorLockMode.Locked;
+        BruitageRotationColonne = GetComponent<AudioSource>();
     }
 
     /**
@@ -122,6 +124,7 @@ public class mouseLook : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R) && hit.transform.name != "Levier")
             {
                 RotationColumn.startRotation(hit.transform.name);
+                BruitageRotationColonne.Play();
             }
             else if (Input.GetKeyDown(KeyCode.R) && hit.transform.name == "Levier" && RotationColumn.call_function)
             {

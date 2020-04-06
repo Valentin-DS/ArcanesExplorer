@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
      */
     void Update()
     {
+        Debug.Log(enMouvement);
         if (!BloqueMouvement)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             #endregion
 
             #region Bruitages
-            if (BruitagePas != null)
+            if (!BruitagePas.Equals(null))
             {
                 if (enMouvement && BruitagePas.isPlaying == false)
                 {
@@ -130,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
             #endregion
 
             #region Torche
-            if (Input.mouseScrollDelta == new Vector2(0, 1))
+            if (Input.mouseScrollDelta == new Vector2(0, 1) && gameObject.tag == "Enigme")
             {
                 activeTorche = !activeTorche;
                 torchePrefab.SetActive(activeTorche);
@@ -139,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         #region Canvas
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && gameObject.tag == "Exploration")
         {
             if (craftCanvas.enabled == true)
             {
@@ -155,13 +156,13 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Respawn
-        
+
         if (ARespawn)
         {
             GetComponent<Transform>().position = SpawnPoint;
             ARespawn = false;
         }
-        
+
         #endregion
     }
 }
