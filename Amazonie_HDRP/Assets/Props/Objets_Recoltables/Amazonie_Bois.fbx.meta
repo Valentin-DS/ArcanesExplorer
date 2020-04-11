@@ -3,7 +3,12 @@ guid: 392b0a2adef14a643a99c5cbf83969df
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TexBois
+    second: {fileID: 2100000, guid: 9cc3e8ca174ffb4449cfcb212d214ec4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
