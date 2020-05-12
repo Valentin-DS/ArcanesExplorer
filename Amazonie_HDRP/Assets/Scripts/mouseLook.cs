@@ -1,5 +1,6 @@
 
-﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
 /**
  * @class mouseLook
@@ -59,11 +60,27 @@ public class mouseLook : MonoBehaviour
     public GameObject laser;
     private AudioSource BruitageRotationColonne;
 
+   /* public List<buildObjects> Objects = new List<buildObjects>();
+    public buildObjects currentObject;
+    private Vector3 currentPosition;
+    public Transform currentPreview;
+    public Transform cam;
+    public RaycastHit hit;
+    public LayerMask layer;
+
+    public float offset = 1.0f;
+    public float gridSize = 1.0f;
+
+    public bool isBuilding;*/
+
     /**
      * Initialisation des paramètres
      */
     void Start()
     {
+        //currentObject = Objects[0];
+        //changeCurrentBuilding();
+
         startTime = Time.time;
         Cursor.lockState = CursorLockMode.Locked;
         BruitageRotationColonne = GetComponent<AudioSource>();
@@ -145,3 +162,4 @@ public class mouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 }
+

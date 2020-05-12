@@ -89,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
      */
     void Update()
     {
-        Debug.Log(enMouvement);
         if (!BloqueMouvement)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
