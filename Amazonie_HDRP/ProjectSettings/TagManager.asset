@@ -13,6 +13,16 @@ TagManager:
   - activableDalle
   - Exploration
   - Enigme
+  - North_Collider
+  - East_Collider
+  - West_Collider
+  - South_Collider
+  - Foundation
+  - Pilier
+  - Walled
+  - ColliderWall
+  - ColliderPilier
+  - ColliderFoundation
   layers:
   - Default
   - TransparentFX
@@ -32,9 +42,9 @@ TagManager:
   - RegenSoif
   - RegenSommeil
   - BuildPreview
-  - 
-  - 
-  - 
+  - Buildable
+  - ColliderPilier
+  - ColliderWall
   - 
   - 
   - 

@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
      */
     [SerializeField]
     Canvas craftCanvas;
+
+    public GameObject craft_Livre_Canvas;
     /**
      * Bruitage de déplacement du joueur
      */
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         #region Canvas
         if (Input.GetKeyDown(KeyCode.C) && gameObject.tag == "Exploration")
         {
-            if (craftCanvas.enabled == true)
+            /*if (craftCanvas.enabled == true)
             {
                 BloqueMouvement = false;
                 craftCanvas.enabled = false;
@@ -150,6 +152,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 BloqueMouvement = true;
                 craftCanvas.enabled = true;
+            }*/
+            if (craft_Livre_Canvas.activeInHierarchy)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                BloqueMouvement = false;
+                craft_Livre_Canvas.SetActive(false);
+            }
+            else
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                BloqueMouvement = true;
+                craft_Livre_Canvas.SetActive(true);
             }
         }
         #endregion
