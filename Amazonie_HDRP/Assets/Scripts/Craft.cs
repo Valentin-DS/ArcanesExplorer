@@ -53,7 +53,7 @@ public class Craft : MonoBehaviour
      * @see List<ObjetCraftable> ObjetsCraftables
      * @see int NavigationIndex
      */
-    void Start()
+    /*void Start()
     {
         ObjetPlace = false;
         ObjetsCraftables = new List<ObjetCraftable>();
@@ -69,12 +69,12 @@ public class Craft : MonoBehaviour
             }));
 
         NavigationIndex = 0;
-    }
+    }*/
 
     /**
      * Boucle principale de Craft : gère la navigation dans l'interface, le choix, le placement, et la validation
      */
-    void Update()
+   /* void Update()
     {
         if (CraftCanvas.enabled)
         {
@@ -128,13 +128,13 @@ public class Craft : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     /**
      * Méthode permettant de vérifier si le joueur a suffisament d'ingrédients pour crafter l'objet demandé
      * @param objetACrafter : Objet demandé par le joueur
      */
-    private bool VerifieIngredients(ObjetCraftable objetACrafter)
+    /*private bool VerifieIngredients(ObjetCraftable objetACrafter)
     {
         bool peutCrafter = true;
 
@@ -161,13 +161,13 @@ public class Craft : MonoBehaviour
         }
 
         return peutCrafter;
-    }
+    }*/
 
     /**
      * Méthode permettant de vérifier si les 4 socles de l'objet touchent bien le sol
      * @see CollisionSocle
      */
-    private bool VerifiePlacement()
+    /*private bool VerifiePlacement()
     {
         bool placementValide = true;
 
@@ -180,18 +180,18 @@ public class Craft : MonoBehaviour
         }
         
         return placementValide;
-    }
+    }*/
 
     /**
      * Méthode permettant de retirer de l'inventaire les ingrédients nécessaires pour crafter l'objet demandé
      * @param objetACrafter : Objet demandé par le joueur
      * @see bool VerifieIngredients(ObjetCraftable objetACrafter)
      */
-    private void RetireIngredients(ObjetCraftable objetACrafter)
+    /*private void RetireIngredients(ObjetCraftable objetACrafter)
     {
         foreach (KeyValuePair<string, int> ingredient in objetACrafter.Recette)
         {
             Inventaire.listeObjets[ingredient.Key] -= ingredient.Value;
         }
-    }
+    }*/
 }
