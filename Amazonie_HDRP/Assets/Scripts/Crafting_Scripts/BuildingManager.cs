@@ -15,6 +15,9 @@ public class BuildingManager : MonoBehaviour
     public Material yellow_Color;
 
     private GameObject[] liste_Affichage_Collider;
+
+    public Inventaire inventaire_Player;
+
     // Update is called once per frame
     void Update()
     {
@@ -75,22 +78,29 @@ public class BuildingManager : MonoBehaviour
             case "Escalier":
                 break;
             case "Pioche":
+                inventaire_Player.ajout_Outil_Inventaire("Pioche");
                 break;
             case "Hache":
+                inventaire_Player.ajout_Outil_Inventaire("Hache");
                 break;
             case "Canne":
+                inventaire_Player.ajout_Outil_Inventaire("Canne");
                 break;
             case "Piege":
+                inventaire_Player.ajout_Objet_Inventaire("Piege");
                 break;
             case "Feu":
+                inventaire_Player.ajout_Objet_Inventaire("Feu");
                 break;
             case "Lit":
+                inventaire_Player.ajout_Objet_Inventaire("Lit");
                 break;
             case "Coffre":
+                inventaire_Player.ajout_Objet_Inventaire("Coffre");
                 break;
             case "Gourde":
+                inventaire_Player.ajout_Objet_Inventaire("Gourde");
                 break;
         }
     }
 }
-//public enum objet

@@ -54,8 +54,6 @@ public class PlayerMovement : MonoBehaviour
     /**
      * Interface de craft en champ sérialisé
      */
-    [SerializeField]
-    Canvas craftCanvas;
 
     public GameObject craft_Livre_Canvas;
     /**
@@ -78,6 +76,11 @@ public class PlayerMovement : MonoBehaviour
     /**
      * Initialisation des paramètres
      */
+
+    public Inventaire inventaire_Player;
+
+    public Inventaire_Book_Manager inventaire_Book;
+    
     private void Start()
     {
         ARespawn = false;
@@ -126,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
             #region Récupération objets
             if (Input.GetKeyDown(KeyCode.E) && mouseLook.hitsmthg)
             {
-                Inventaire.ajoutItem(mouseLook.objectHitName.transform.gameObject.tag);
+                inventaire_Player.ajout_Ingredient_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
                 Destroy(mouseLook.objectHitName.transform.gameObject);
             }
             #endregion
@@ -143,16 +146,6 @@ public class PlayerMovement : MonoBehaviour
         #region Canvas
         if (Input.GetKeyDown(KeyCode.C) && gameObject.tag == "Exploration")
         {
-            /*if (craftCanvas.enabled == true)
-            {
-                BloqueMouvement = false;
-                craftCanvas.enabled = false;
-            }
-            else
-            {
-                BloqueMouvement = true;
-                craftCanvas.enabled = true;
-            }*/
             if (craft_Livre_Canvas.activeInHierarchy)
             {
                 Cursor.visible = false;
@@ -169,7 +162,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         #endregion
-
+        if (Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Exploration")
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            inventaire_Book.canvas_Inventaire_Active();
+        }
         #region Respawn
 
         if (ARespawn)

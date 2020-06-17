@@ -170,14 +170,7 @@ public class mouseLook : MonoBehaviour
 
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
-            /* if (isBuilding)
-        {
-            startPreview();
-        }*/
-            /* if (Input.GetButtonDown("Fire1"))
-             {
-                 Build();
-             }*/
+            
         }
         //En train de build
         else
@@ -193,53 +186,4 @@ public class mouseLook : MonoBehaviour
         }
 
     }
-
-    /*public void changeCurrentBuilding()
-    {
-        GameObject curPrev = Instantiate(currentObject.preview, currentPosition, Quaternion.identity);
-        currentPreview = curPrev.transform;
-    }*/
-
-    /* public void startPreview()
-     {
-         if (Physics.Raycast(cam.position, cam.forward, out hit, 20, layer))
-         {
-             if (hit.transform != this.transform)
-             {
-                 showPreview(hit);
-             }
-         }
-     }*/
-
-    /* public void showPreview(RaycastHit hit2)
-     {
-         int xCount = Mathf.RoundToInt(hit2.point.x / size);
-         int yCount = Mathf.RoundToInt(hit2.point.y / sizeY);
-         int zCount = Mathf.RoundToInt(hit2.point.z / size);
-
-         currentPosition = new Vector3( (float) xCount * size, (float) yCount * sizeY, (float) zCount * size);
-         currentPreview.position = currentPosition;
-     }*/
-    /* private void OnDrawGizmos()
-     {
-         Gizmos.color = Color.yellow;
-         Gizmos.DrawSphere(currentPosition, 0.5f);
-     }/*
-    /* public void Build()
-     {
-         PreviewObject PO = currentPreview.GetComponent<PreviewObject>();
-         if (PO.IsBuildable)
-         {
-             Instantiate(currentObject.prefab, currentPosition, Quaternion.identity);
-         }
-     }*/
-
 }
-
-/*[System.Serializable]
-public class buildObjects
-{
-    public string name;
-    public GameObject prefab;
-    public GameObject preview;
-}*/
