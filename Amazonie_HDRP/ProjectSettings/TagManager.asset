@@ -23,6 +23,7 @@ TagManager:
   - ColliderWall
   - ColliderPilier
   - ColliderFoundation
+  - Outil
   layers:
   - Default
   - TransparentFX
