@@ -60,33 +60,18 @@ public class mouseLook : MonoBehaviour
     public GameObject laser;
     private AudioSource BruitageRotationColonne;
 
-    /*public List<buildObjects> Objects = new List<buildObjects>();
-    public buildObjects currentObject;
-    private Vector3 currentPosition;
-    private Vector3 currentRotation;
-    public Transform currentPreview;
-    public Transform cam;
-    public RaycastHit hit;
-    public LayerMask layer;*
-
-    public float offset = 1.0f;
-    public float gridSize = 1.0f;
-
-    public bool isBuilding;
-
-    [SerializeField]
-    private float size = 1f;
-
-    [SerializeField]
-    private float sizeY = 1f;*/
+   
     /**
      * Initialisation des paramètres
      */
+    int layerMaskRegenFaim = 1 << 14;
+    int layerMaskRegenSoif = 1 << 15;
+    int layerMaskRegenSommeil = 1 << 16;
+    int layerMaskGround = 1 << 10;
+    int layerMask = 1 << 11;
+    int layerMaskTemple = 1 << 12;
     void Start()
     {
-       // currentObject = Objects[0];
-        //changeCurrentBuilding();
-
         startTime = Time.time;
        // Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -98,12 +83,7 @@ public class mouseLook : MonoBehaviour
      */
     void Update()
     {
-        int layerMaskRegenFaim = 1 << 14;
-        int layerMaskRegenSoif = 1 << 15;
-        int layerMaskRegenSommeil = 1 << 16;
-        int layerMaskGround = 1 << 10;
-        int layerMask = 1 << 11;
-        int layerMaskTemple = 1 << 12;
+        
 
         RaycastHit hit;
         if (!BuildingManager.isBuilding)

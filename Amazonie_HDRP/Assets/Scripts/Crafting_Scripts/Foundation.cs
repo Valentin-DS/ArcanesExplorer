@@ -12,7 +12,7 @@ public class Foundation : MonoBehaviour
 
     public float mousePosX;
     public float mousePosY;
-    Foundation test;
+   // Foundation test;
 
     public Material material_Foundation;
 
@@ -20,7 +20,7 @@ public class Foundation : MonoBehaviour
     private void Start()
     {
         cam = GameObject.Find("Main Camera");
-        test = this;
+          //test = this;
     }
     // Update is called once per frame
     void Update()

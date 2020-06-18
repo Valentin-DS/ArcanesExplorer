@@ -73,6 +73,8 @@ public class Day_Night_Cycle : MonoBehaviour
     private bool stop_degrade = false;
 
     private bool prec_Light = false;
+
+    public Cultivable_Manager cultivable_Manage;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +96,7 @@ public class Day_Night_Cycle : MonoBehaviour
         //Quand on a terminé une journée, on remet à 0
         if(currentTimeOfDay >= 1)
         {
+            cultivable_Manage.terre_Jour_Suivant();
             currentTimeOfDay = 0;
             stop_degrade = false;
             particle_Rain.SetActive(false);
