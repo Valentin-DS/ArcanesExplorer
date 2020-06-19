@@ -1,25 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
     public double tempsCourant;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public double tempsLimite;
 
-    // Update is called once per frame
     void Update()
     {
         tempsCourant += Time.deltaTime;
-        Debug.Log(tempsCourant);
+        //Debug.Log(tempsCourant);
     }
 
     public void Reinitialise()
     {
         tempsCourant = 0;
+    }
+
+    public void Randomise(int min, int max)
+    {
+        tempsLimite = Random.Range(min, max);
     }
 }

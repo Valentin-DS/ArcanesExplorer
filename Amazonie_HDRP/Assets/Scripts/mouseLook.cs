@@ -83,15 +83,19 @@ public class mouseLook : MonoBehaviour
      */
     void Update()
     {
-        
-
         RaycastHit hit;
         if (!BuildingManager.isBuilding)
         {
             //Regen faim
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenFaim) && Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                SanteJoueur.Instance.Faim = 1;
+                GameObject piege = hit.transform.parent.gameObject;
+                Timer timerPiege = piege.GetComponent<Timer>();
+                if (timerPiege.tempsCourant >= timerPiege.tempsLimite)
+                {
+                    SanteJoueur.Instance.Faim = 1;
+                    Destroy(piege);
+                }
             }
 
             //Regen soif
