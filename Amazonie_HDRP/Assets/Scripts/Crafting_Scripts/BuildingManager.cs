@@ -101,6 +101,9 @@ public class BuildingManager : MonoBehaviour
             case "Gourde":
                 inventaire_Player.ajout_Objet_Inventaire("Gourde");
                 break;
+            case "Houe":
+                inventaire_Player.ajout_Outil_Inventaire("Houe");
+                break;
         }
     }
 }

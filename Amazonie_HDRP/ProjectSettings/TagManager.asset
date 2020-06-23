@@ -24,6 +24,8 @@ TagManager:
   - ColliderPilier
   - ColliderFoundation
   - Outil
+  - Objet
+  - Ingredient
   layers:
   - Default
   - TransparentFX

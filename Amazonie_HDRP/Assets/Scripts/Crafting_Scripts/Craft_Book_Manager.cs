@@ -63,6 +63,7 @@ public class Craft_Book_Manager : MonoBehaviour
             }
         }
     }
+
     public void lancer_craft(string nom_item)
     {
         bool craft_Possible = false;

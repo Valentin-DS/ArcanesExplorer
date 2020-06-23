@@ -96,6 +96,7 @@ public class Day_Night_Cycle : MonoBehaviour
         //Quand on a terminé une journée, on remet à 0
         if(currentTimeOfDay >= 1)
         {
+            
             cultivable_Manage.terre_Jour_Suivant();
             currentTimeOfDay = 0;
             stop_degrade = false;
@@ -309,8 +310,6 @@ public class Day_Night_Cycle : MonoBehaviour
         //Génération d'un nombre aléatoire pour chaqué éléments météo
         float rain_Presence_Rand = (int) Random.Range(0f,5f);
         float lightning_Presence_Rand = (int) Random.Range(0f, 7f);
-        Debug.Log(rain_Presence_Rand);
-        Debug.Log(lightning_Presence_Rand);
         float myst_Presence_Rand = (int) Random.Range(0f, 7f);
 
         //Déduction de la présence d'un élément météo

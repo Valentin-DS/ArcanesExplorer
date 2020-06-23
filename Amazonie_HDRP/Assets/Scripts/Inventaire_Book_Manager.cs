@@ -12,6 +12,10 @@ public class Inventaire_Book_Manager : MonoBehaviour
 
     public Inventaire inventaire_Player;
 
+    public GameObject spawn_Position;
+
+    public SanteJoueur sante_Joueur;
+
     public List<GameObject> liste_Ingredient_RawImage = new List<GameObject>();
     public List<GameObject> liste_Outil_RawImage = new List<GameObject>();
     public List<GameObject> liste_Objet_RawImage = new List<GameObject>();
@@ -27,6 +31,8 @@ public class Inventaire_Book_Manager : MonoBehaviour
     {
         if (canvas_Inventaire.activeInHierarchy)
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             options_Inventaire.SetActive(true);
             unload_Ingredient_Inventaire();
             unload_Objet_Inventaire();
@@ -35,6 +41,7 @@ public class Inventaire_Book_Manager : MonoBehaviour
         }
         else
         {
+            
             load_Ingredient_Inventaire();
             load_Outil_Inventaire();
             load_Objet_Inventaire();
@@ -146,64 +153,77 @@ public class Inventaire_Book_Manager : MonoBehaviour
     }
     public void utilisation_Objet()
     {
-        //Verifie qu'on utilise bien un objet ou un outil
-        if(objet_Categorie == "Ingredient")
+        foreach(Transform child in spawn_Position.transform)
         {
-            return;
+            Destroy(child.gameObject);
         }
-        else
+        //Desactive le canvas de craft si l'on peut utiliser l'objet
+        canvas_Inventaire_Active();
+        string objet_Used = "";
+
+        //On recupere l'objet que l'on veut utiliser dans l'inventaire
+        switch (objet_Categorie)
         {
-            //Desactive le canvas de craft si l'on peut utiliser l'objet
-            canvas_Inventaire_Active();
-            string objet_Used = "";
-
-            //On recupere l'objet que l'on veut utiliser dans l'inventaire
-            switch (objet_Categorie)
+            case "Ingredient":
+                objet_Used = inventaire_Player.liste_Ingredient_Inventaire[objet_Selectionne].nom_Objet;
+                break;
+            case "Objet":
+                objet_Used = inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].nom_Objet;
+                break;
+            case "Outil":
+                objet_Used = inventaire_Player.liste_Outil_Inventaire[objet_Selectionne].nom_Objet;
+                break;
+        }
+        //On instancie dans le jeu l'objet choisi pour êter utilisé
+        switch (objet_Used)
             {
-                case "Objet":
-                    objet_Used = inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].nom_Objet;
-                    break;
-
-                case "Outil":
-                    objet_Used = inventaire_Player.liste_Outil_Inventaire[objet_Selectionne].nom_Objet;
-                    break;
-            }
-            //On instancie dans le jeu l'objet choisi pour êter utilisé
-            switch (objet_Used)
-            {
-                //Revoir la position de l'instanciation pour les outils
-                case "Hache":
-                    Instantiate(liste_Objet_Instanciable[0], Vector3.zero, liste_Objet_Instanciable[0].transform.rotation);
-                    break;
-                case "Pioche":
-                    Instantiate(liste_Objet_Instanciable[1], Vector3.zero, liste_Objet_Instanciable[1].transform.rotation);
-                    break;
-                case "Canne":
-                    Instantiate(liste_Objet_Instanciable[2], Vector3.zero, liste_Objet_Instanciable[2].transform.rotation);
-                    break;
-                //On instancie les objets à placer sachant qu'ils ont un script qui gère leur positionnement au bout du raycast du joueur
-                case "Piege":
-                    jeter_Objet();
-                    Instantiate(liste_Objet_Instanciable[3], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
-                    break;
-                case "Feu":
-                    jeter_Objet();
-                    Instantiate(liste_Objet_Instanciable[4], Vector3.zero, liste_Objet_Instanciable[4].transform.rotation);
-                    break;
-                case "Lit":
-                    jeter_Objet();
-                    Instantiate(liste_Objet_Instanciable[5], Vector3.zero, liste_Objet_Instanciable[5].transform.rotation);
-                    break;
-                case "Coffre":
-                    jeter_Objet();
-                    Instantiate(liste_Objet_Instanciable[6], Vector3.zero, liste_Objet_Instanciable[6].transform.rotation);
-                    break;
-                case "Gourde":
-                    jeter_Objet();
-                    Instantiate(liste_Objet_Instanciable[7], Vector3.zero, liste_Objet_Instanciable[7].transform.rotation);
-                    break;
-            }
-        }        
+             //Revoir la position de l'instanciation pour les outils
+            case "Hache":
+                Instantiate(liste_Objet_Instanciable[0], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                break;
+            case "Pioche":
+                Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, liste_Objet_Instanciable[1].transform.rotation, spawn_Position.transform);
+                break;
+            case "Canne":
+                Instantiate(liste_Objet_Instanciable[2], spawn_Position.transform.position, liste_Objet_Instanciable[2].transform.rotation, spawn_Position.transform);
+                break;
+            //On instancie les objets à placer sachant qu'ils ont un script qui gère leur positionnement au bout du raycast du joueur
+            case "Piege":
+                jeter_Objet();
+                Instantiate(liste_Objet_Instanciable[3], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
+                break;
+            case "Feu":
+                jeter_Objet();
+                Instantiate(liste_Objet_Instanciable[4], Vector3.zero, liste_Objet_Instanciable[4].transform.rotation);
+                break;
+            case "Lit":
+                jeter_Objet();
+                Instantiate(liste_Objet_Instanciable[5], Vector3.zero, liste_Objet_Instanciable[5].transform.rotation);
+                break;
+            case "Coffre":
+                jeter_Objet();
+                Instantiate(liste_Objet_Instanciable[6], Vector3.zero, liste_Objet_Instanciable[6].transform.rotation);
+                break;
+            case "Gourde":
+                jeter_Objet();
+                Instantiate(liste_Objet_Instanciable[7], spawn_Position.transform.position, liste_Objet_Instanciable[7].transform.rotation);
+                break;
+            case "Graine":
+                Instantiate(liste_Objet_Instanciable[8], spawn_Position.transform.position, Quaternion.identity, spawn_Position.transform);
+                unload_Ingredient_Inventaire();
+                load_Ingredient_Inventaire();
+                break;
+            case "Houe":
+                Instantiate(liste_Objet_Instanciable[9], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                break;
+            case "Patate":
+                inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;
+                inventaire_Player.clear_Inventaire();
+                sante_Joueur.Faim += 0.1f;
+                break;
+        }
+        
+        options_Inventaire.SetActive(false);
     }
 
 

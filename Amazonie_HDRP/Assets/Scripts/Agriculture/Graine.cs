@@ -6,10 +6,13 @@ public class Graine : MonoBehaviour
 {
     public GameObject cam;
     private RaycastHit hit;
+
+    public Inventaire inventaire_Joueur;
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.Find("Main Camera");
+        inventaire_Joueur = GameObject.Find("Player 1").GetComponent<Inventaire>();
     }
 
     // Update is called once per frame
@@ -22,8 +25,15 @@ public class Graine : MonoBehaviour
                 {
                     hit.transform.GetComponent<TerreCultivable>().is_Planted = true;
                     hit.transform.GetComponent<TerreCultivable>().planted();
+                    
+                    //Supprimer la graine de l'inventaire
+                    bool result = inventaire_Joueur.check_Ingredient_Quantity("Graine");
+                    Debug.Log(result);
+                    if (!result)
+                    {
+                        Destroy(this.gameObject);
+                    }
                 }
-                
             }
         }
     }

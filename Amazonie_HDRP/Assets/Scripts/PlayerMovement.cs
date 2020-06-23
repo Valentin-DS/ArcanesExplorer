@@ -129,7 +129,14 @@ public class PlayerMovement : MonoBehaviour
             #region Récupération objets
             if (Input.GetKeyDown(KeyCode.E) && mouseLook.hitsmthg)
             {
-                inventaire_Player.ajout_Ingredient_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
+                if(mouseLook.objectHitName.transform.gameObject.tag == "Objet")
+                {
+                    inventaire_Player.ajout_Objet_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
+                }
+                else if(mouseLook.objectHitName.transform.gameObject.tag == "Ingredient")
+                {
+                    inventaire_Player.ajout_Ingredient_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
+                }
                 Destroy(mouseLook.objectHitName.transform.gameObject);
             }
             #endregion

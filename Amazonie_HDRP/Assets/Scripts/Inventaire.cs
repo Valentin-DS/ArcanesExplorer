@@ -41,6 +41,7 @@ public class Inventaire : MonoBehaviour
                 }   
             }
         }
+        
         //S'il reste de la place dans l'inventaire et que chaque objet identique a atteint sa capacité maximale alors on recréer une case dans l'inventaire
         if(ajout == false && liste_Ingredient_Inventaire.Count < taille_Ingredient_Inventaire_Max)
         {
@@ -73,6 +74,10 @@ public class Inventaire : MonoBehaviour
                     break;
                 }
             }
+        }
+        if (name_Object == "Patate")
+        {
+            ajout_Ingredient_Inventaire("Graine");
         }
         if (ajout == false && liste_Objet_Inventaire.Count < taille_Objet_Inventaire_Max)
         {
@@ -123,6 +128,68 @@ public class Inventaire : MonoBehaviour
         }
     }
 
+    public bool check_Ingredient_Quantity(string nom_objet)
+    {
+        int number_ingredient = 0;
+        bool first_item = true;
+        //On parcours la liste des ingrédients 
+        for (int i = 0; i < liste_Ingredient_Inventaire.Count; i++)
+        {
+            //On vérifie si l'ingrédient récupéré fait déjà partie de l'inventaire
+            if (liste_Ingredient_Inventaire[i].nom_Objet == nom_objet)
+            {
+                if (first_item)
+                {
+                    liste_Ingredient_Inventaire[i].quantite_Actuelle -= 1;
+                    first_item = false;
+                    if (liste_Ingredient_Inventaire[i].quantite_Actuelle == 0)
+                    {
+                        liste_Ingredient_Inventaire.Remove(liste_Ingredient_Inventaire[i]);
+                    }
+                    else
+                    {
+                        number_ingredient += liste_Ingredient_Inventaire[i].quantite_Actuelle;
+                    }
+                }
+                else
+                {
+                    number_ingredient += liste_Ingredient_Inventaire[i].quantite_Actuelle;
+                }
+            }
+        }
+        if(number_ingredient > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void clear_Inventaire()
+    {
+        for(int i = 0; i < liste_Ingredient_Inventaire.Count; i++)
+        {
+            if(liste_Ingredient_Inventaire[i].quantite_Actuelle == 0)
+            {
+                liste_Ingredient_Inventaire.Remove(liste_Ingredient_Inventaire[i]);
+            }
+        }
+        for (int i = 0; i < liste_Objet_Inventaire.Count; i++)
+        {
+            if (liste_Objet_Inventaire[i].quantite_Actuelle == 0)
+            {
+                liste_Objet_Inventaire.Remove(liste_Objet_Inventaire[i]);
+            }
+        }
+        for (int i = 0; i < liste_Outil_Inventaire.Count; i++)
+        {
+            if (liste_Outil_Inventaire[i].quantite_Actuelle == 0)
+            {
+                liste_Outil_Inventaire.Remove(liste_Outil_Inventaire[i]);
+            }
+        }
+    }
     public Texture insert_Sprite(string name_Object)
     {
         Texture sprite_Finale = null;

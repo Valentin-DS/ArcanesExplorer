@@ -7,7 +7,6 @@ public class Houe : MonoBehaviour
     public GameObject cam;
     private RaycastHit hit;
     [SerializeField] private float size = 1;
-    //int layerMaskGround = 1 << 10;
     public GameObject terreCultivable;
 
     // Start is called before the first frame update
@@ -24,9 +23,21 @@ public class Houe : MonoBehaviour
         
             if (Input.GetMouseButtonDown(0) && hit.transform.name == "Terrain")
             {
+            
                 //Jouer l'animation de la houe
                 Vector3 positionTerre = getNearestSpot(new Vector3(hit.point.x, hit.point.y, hit.point.z));
                 Instantiate(terreCultivable, positionTerre, Quaternion.identity);
+                
+            }
+            else if(Input.GetMouseButtonDown(0) && hit.transform.name.Contains("TerreCulti"))
+            {
+                if(hit.transform.GetComponent<TerreCultivable>().is_Recoltable == true)
+                {
+                    //Recuperer le legume et l'ajouter dans l'inventaire
+                    //Jouer une animation 
+                    //Remettre un objet Terre_Cultivable de base
+                    Debug.Log("LA CULTURE A ETE RECUPERE");
+                }
             }
         }
     }

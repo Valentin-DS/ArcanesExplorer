@@ -8,7 +8,7 @@ public class ComportementHache : MonoBehaviour
     Animation animationHache;
     void Start()
     {
-        animationHache = transform.GetComponentInChildren<Animation>();
+        animationHache = GetComponent<Animation>();
         animationHache.clip.legacy = true;
     }
 

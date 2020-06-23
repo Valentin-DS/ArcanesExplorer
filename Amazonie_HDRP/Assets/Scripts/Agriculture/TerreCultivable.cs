@@ -11,28 +11,23 @@ public class TerreCultivable : MonoBehaviour
 
     public GameObject next_Day_Terre;
 
-
+    int layerMask = 11;
     public void next_Day_Upgrade()
     {
-        if(day_Of_Plant < 4)
+        if(this.day_Of_Plant < 3)
         {
-            day_Of_Plant++;
-            for (int i = 0; i < manager_Cultivable.liste_Terre_Cultivable.Count; i++)
-            {
-                if (this.gameObject.name == manager_Cultivable.liste_Terre_Cultivable[i].name)
-                {
-                    manager_Cultivable.liste_Terre_Cultivable.Remove(manager_Cultivable.liste_Terre_Cultivable[i]);
-                }
-            }
             GameObject new_plant = Instantiate(next_Day_Terre, this.transform.position, Quaternion.identity);
+            new_plant.GetComponent<TerreCultivable>().manager_Cultivable = GameObject.Find("Agriculture_Manager").GetComponent<Cultivable_Manager>();
+            new_plant.GetComponent<TerreCultivable>().day_Of_Plant = day_Of_Plant + 1;
             new_plant.GetComponent<TerreCultivable>().is_Planted = true;
-            new_plant.GetComponent<TerreCultivable>().day_Of_Plant = this.day_Of_Plant;
-            new_plant.GetComponent<TerreCultivable>().planted();
+            manager_Cultivable.liste_Terre_Cultivable_Temporaire.Add(new_plant);
             Destroy(this.gameObject);
         }
         else
         {
             is_Recoltable = true;
+            this.gameObject.layer = layerMask;
+            this.gameObject.name = "Patate";
         }
     }
     public void planted()
@@ -43,4 +38,5 @@ public class TerreCultivable : MonoBehaviour
             manager_Cultivable.liste_Terre_Cultivable.Add(this.gameObject);
         }
     }
+    
 }
