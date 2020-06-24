@@ -2,38 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Foundation : MonoBehaviour
+public class Piege : MonoBehaviour
 {
     public bool isPlaced = false;
-    public bool isSnapped = false;
     private RaycastHit hit;
     public GameObject cam;
     private Vector3 currentPosition;
-
-    public float mousePosX;
-    public float mousePosY;
-   // Foundation test;
-
-    public Material material_Foundation;
-
+    private int layer_Terrain = 1 << 10;
     public Craft_Book_Manager craft_Book;
 
-    private void Start()
+    public ComportementPiege comportement_Piege;
+    // Start is called before the first frame update
+    void Start()
     {
         cam = GameObject.Find("Main Camera");
         craft_Book = GameObject.Find("Craft_Canvas_Manager").GetComponent<Craft_Book_Manager>();
-
-        //test = this;
     }
+
     // Update is called once per frame
     void Update()
     {
-        if (!isPlaced && !isSnapped)
+        if (!isPlaced)
         {
-            //maybe a virer
-            BuildingManager.isBuilding = true;
-
-            if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, 20))
+            if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, 20, layer_Terrain))
             {
                 if (hit.transform != this.transform)
                 {
@@ -42,23 +33,16 @@ public class Foundation : MonoBehaviour
                 }
             }
         }
-        //Si on clique sur le bouton de la souris on pose l'objet
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && BuildingManager.isBuilding)
         {
             isPlaced = true;
             craft_Book.delete_Ingredient();
             craft_Book.clear_Inventaire();
             BuildingManager.object_Actual = null;
             BuildingManager.isBuilding = false;
-            BuildingManager.object_Actual = null;
-            this.GetComponent<Renderer>().material = material_Foundation;
-            BuildingManager.isBuilding = false;
+            comportement_Piege.enabled = true;
             this.enabled = false;
         }
-        //Retire le snap si on s'éloigne trop de l'objet
-        if (isSnapped && !isPlaced && (Mathf.Abs(mousePosX - Input.GetAxis("Mouse X")) > 0.2f || Mathf.Abs(mousePosY - Input.GetAxis("Mouse Y")) > 0.2f))
-        {
-            isSnapped = false;
-        }
+
     }
 }

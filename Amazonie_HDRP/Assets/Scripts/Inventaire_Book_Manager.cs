@@ -175,22 +175,25 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 break;
         }
         //On instancie dans le jeu l'objet choisi pour êter utilisé
+        GameObject object_instantiate;
         switch (objet_Used)
             {
              //Revoir la position de l'instanciation pour les outils
             case "Hache":
-                Instantiate(liste_Objet_Instanciable[0], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[0], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate.name = "Hache";
                 break;
             case "Pioche":
-                Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, liste_Objet_Instanciable[1].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, liste_Objet_Instanciable[1].transform.rotation, spawn_Position.transform);
+                object_instantiate.name = "Pioche";
                 break;
             case "Canne":
-                Instantiate(liste_Objet_Instanciable[2], spawn_Position.transform.position, liste_Objet_Instanciable[2].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[2], spawn_Position.transform.position, liste_Objet_Instanciable[2].transform.rotation, spawn_Position.transform);
+                object_instantiate.name = "Canne";
                 break;
             //On instancie les objets à placer sachant qu'ils ont un script qui gère leur positionnement au bout du raycast du joueur
             case "Piege":
-                jeter_Objet();
-                Instantiate(liste_Objet_Instanciable[3], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[3], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
                 break;
             case "Feu":
                 jeter_Objet();
@@ -214,7 +217,8 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 load_Ingredient_Inventaire();
                 break;
             case "Houe":
-                Instantiate(liste_Objet_Instanciable[9], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[9], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate.name = "Houe";
                 break;
             case "Patate":
                 inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;

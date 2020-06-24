@@ -13,6 +13,7 @@ public class Wall : MonoBehaviour
     public float mousePosX;
     public float mousePosY;
     Wall test;
+    public Craft_Book_Manager craft_Book;
 
     public Material material_Wall;
 
@@ -23,6 +24,8 @@ public class Wall : MonoBehaviour
     void Start()
     {
         cam = GameObject.Find("Main Camera");
+        craft_Book = GameObject.Find("Craft_Canvas_Manager").GetComponent<Craft_Book_Manager>();
+
         test = this;
     }
 
@@ -54,6 +57,8 @@ public class Wall : MonoBehaviour
                 collider.GetComponent<Renderer>().enabled = false;
             }
             this.GetComponent<Renderer>().material = material_Wall;
+            craft_Book.delete_Ingredient();
+            craft_Book.clear_Inventaire();
             BuildingManager.object_Actual = null;
             BuildingManager.isBuilding = false;
             this.enabled = false;

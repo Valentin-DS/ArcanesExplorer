@@ -12,7 +12,11 @@ public class Pilier : MonoBehaviour
 
     public float mousePosX;
     public float mousePosY;
+    
+    //A supprimer je pense
     Pilier test;
+
+    public Craft_Book_Manager craft_Book;
 
     public Vector3 positionFoundation;
     public Material material_Pilier;
@@ -24,6 +28,9 @@ public class Pilier : MonoBehaviour
     void Start()
     {
         cam = GameObject.Find("Main Camera");
+        craft_Book = GameObject.Find("Craft_Canvas_Manager").GetComponent<Craft_Book_Manager>();
+
+        //A supprimer je pense
         test = this;
     }
 
@@ -50,6 +57,8 @@ public class Pilier : MonoBehaviour
                 collider.GetComponent<Renderer>().enabled = false;
             }
             isPlaced = true;
+            craft_Book.delete_Ingredient();
+            craft_Book.clear_Inventaire();
             BuildingManager.object_Actual = null;
             this.GetComponent<Renderer>().material = material_Pilier;
             BuildingManager.isBuilding = false;

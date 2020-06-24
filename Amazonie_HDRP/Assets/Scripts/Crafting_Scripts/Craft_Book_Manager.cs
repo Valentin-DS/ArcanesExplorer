@@ -72,8 +72,8 @@ public class Craft_Book_Manager : MonoBehaviour
 
         if (craft_Possible)
         {
-            delete_Ingredient();
-            clear_Inventaire();
+            //delete_Ingredient();
+            //clear_Inventaire();
             canvas_Craft.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;

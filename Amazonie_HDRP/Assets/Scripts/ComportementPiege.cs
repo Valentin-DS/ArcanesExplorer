@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ComportementPiege : MonoBehaviour
 {
+    public int temps_Avant_Capture;
+
     // Start is called before the first frame update
-    Timer timer;
-    [SerializeField] Transform transformJoueur;
     void Start()
     {
-        timer = GetComponent<Timer>();
-        timer.Randomise(10, 30);
-        Debug.Log(timer.tempsLimite);
+        temps_Avant_Capture = Random.Range(10, 15);
+        StartCoroutine(capture_Viande(temps_Avant_Capture));
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator capture_Viande(int timer)
     {
+        yield return new WaitForSeconds(timer);
+        this.gameObject.layer = 11;
     }
 }
