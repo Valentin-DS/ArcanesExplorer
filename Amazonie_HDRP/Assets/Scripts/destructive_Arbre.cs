@@ -23,7 +23,7 @@ public class destructive_Arbre : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Hache" && other.GetComponent<Animation>().isPlaying)
+        if(other.gameObject.name == "Hache" && other.GetComponent<Animation>().isPlaying && point_Vie_Arbre >0)
         {
             point_Vie_Arbre--;
             Debug.Log(point_Vie_Arbre);

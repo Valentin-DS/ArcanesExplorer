@@ -15,15 +15,15 @@ public class SanteJoueur : MonoBehaviour
     /**
      * Faim du joueur
      */
-    public float Faim { get; set; }
+    public float Faim;
     /**
      * Soif du joueur
      */
-    public float Soif { get; set; }
+    public float Soif;
     /**
      * Sommeil du joueur
      */
-    public float Sommeil { get; set; }
+    public float Sommeil;
     /**
      * Booléen déterminant si le joueur est mort
      */
@@ -72,7 +72,7 @@ public class SanteJoueur : MonoBehaviour
             }
             else
             {
-                PlayerMovement.ARespawn = true;
+                //PlayerMovement.ARespawn = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 CanvasGameOver.gameObject.SetActive(true);

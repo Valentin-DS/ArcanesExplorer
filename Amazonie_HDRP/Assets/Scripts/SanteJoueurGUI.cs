@@ -35,22 +35,22 @@ public class SanteJoueurGUI : MonoBehaviour
     /**
      * Coefficient de faim : plus il est elevé, plus la jauge de faim descendra rapidement
      */
-    public float CoefficientFaim { get; private set; }
+    public float CoefficientFaim;
     /**
      * Coefficient de soif : plus il est elevé, plus la jauge de soif descendra rapidement
      */
-    public float CoefficientSoif { get; private set; }
+    public float CoefficientSoif;
     /**
      * Coefficient de sommeil : plus il est elevé, plus la jauge de sommeil descendra rapidement
      */
-    public float CoefficientSommeil { get; private set; }
+    public float CoefficientSommeil;
 
     /**
      * Initialisation des paramètres
      */
     void Start()
     {
-        CoefficientFaim = 0.00016f;
+        CoefficientFaim = 0.00004f;
         //CoefficientFaim = 0.003f;
         CoefficientSoif = 0.00008f;
         CoefficientSommeil = 0.00004f;
