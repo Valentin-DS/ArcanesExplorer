@@ -8,52 +8,26 @@ using UnityEngine.UI;
  */
 public class SanteJoueurGUI : MonoBehaviour
 {
-    /**
-     * Objet entier de la jauge de faim en champ sérialisé
-     */
-    [SerializeField] GameObject JaugeFaim;
-    /**
-     * Objet entier de la jauge de soif en champ sérialisé
-     */
-    [SerializeField] GameObject JaugeSoif;
-    /**
-     * Objet entier de la jauge de sommeil en champ sérialisé
-     */
-    [SerializeField] GameObject JaugeSommeil;
-    /**
-     * Image correspondant au niveau de faim du joueur
-     */
-    [SerializeField] Image ContenuJaugeFaim;
-    /**
-     * Image correspondant au niveau de soif du joueur
-     */
-    [SerializeField] Image ContenuJaugeSoif;
-    /**
-     * Image correspondant au niveau de sommeil du joueur
-     */
-    [SerializeField] Image ContenuJaugeSommeil;
-    /**
-     * Coefficient de faim : plus il est elevé, plus la jauge de faim descendra rapidement
-     */
-    public float CoefficientFaim;
-    /**
-     * Coefficient de soif : plus il est elevé, plus la jauge de soif descendra rapidement
-     */
-    public float CoefficientSoif;
-    /**
-     * Coefficient de sommeil : plus il est elevé, plus la jauge de sommeil descendra rapidement
-     */
-    public float CoefficientSommeil;
+    [SerializeField] Transform fondJaugeNourriture;
+    [SerializeField] Transform fondJaugeEau;
+    [SerializeField] Transform fondJaugeRepos;
+
+    [SerializeField] Transform contenuJaugeNourriture;
+    [SerializeField] Transform contenuJaugeEau;
+    [SerializeField] Transform contenuJaugeRepos;
+
+    float coefficientFaim;
+    float coefficientSoif;
+    float coefficientSommeil;
 
     /**
      * Initialisation des paramètres
      */
     void Start()
     {
-        CoefficientFaim = 0.00004f;
-        //CoefficientFaim = 0.003f;
-        CoefficientSoif = 0.00008f;
-        CoefficientSommeil = 0.00004f;
+        this.coefficientFaim = 0.00002f;
+        this.coefficientSoif = 0.00004f;
+        this.coefficientSommeil = 0.00001f;
     }
 
     /**
@@ -61,18 +35,15 @@ public class SanteJoueurGUI : MonoBehaviour
      */
     void Update()
     {
-        JaugeFaim.SetActive(!SanteJoueur.Instance.EstMort);
-        JaugeSoif.SetActive(!SanteJoueur.Instance.EstMort);
-        JaugeSommeil.SetActive(!SanteJoueur.Instance.EstMort);
         if (!SanteJoueur.Instance.EstMort)
         {
-            SanteJoueur.Instance.Faim -= CoefficientFaim;
-            SanteJoueur.Instance.Soif -= CoefficientSoif;
-            SanteJoueur.Instance.Sommeil -= CoefficientSommeil;
+            SanteJoueur.Instance.Nourriture -= this.coefficientFaim;
+            SanteJoueur.Instance.Eau -= this.coefficientSoif;
+            SanteJoueur.Instance.Repos -= this.coefficientSommeil;
         }
 
-        ContenuJaugeFaim.fillAmount = SanteJoueur.Instance.Faim;
-        ContenuJaugeSoif.fillAmount = SanteJoueur.Instance.Soif;
-        ContenuJaugeSommeil.fillAmount = SanteJoueur.Instance.Sommeil;
+        this.contenuJaugeNourriture.gameObject.transform.localScale = new Vector3(0.02f, SanteJoueur.Instance.Nourriture, 0);
+        this.contenuJaugeEau.gameObject.transform.localScale = new Vector3(0.02f, SanteJoueur.Instance.Eau, 0);
+        this.contenuJaugeRepos.gameObject.transform.localScale = new Vector3(0.02f, SanteJoueur.Instance.Repos, 0);
     }
 }

@@ -223,7 +223,7 @@ public class Inventaire_Book_Manager : MonoBehaviour
             case "Patate":
                 inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;
                 inventaire_Player.clear_Inventaire();
-                sante_Joueur.Faim += 0.1f;
+                sante_Joueur.Nourriture += 0.1f;
                 break;
         }
         

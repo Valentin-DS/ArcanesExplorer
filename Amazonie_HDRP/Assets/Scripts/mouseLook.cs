@@ -93,7 +93,7 @@ public class mouseLook : MonoBehaviour
                 Timer timerPiege = piege.GetComponent<Timer>();
                 if (timerPiege.tempsCourant >= timerPiege.tempsLimite)
                 {
-                    SanteJoueur.Instance.Faim = 1;
+                    SanteJoueur.Instance.Nourriture = 1;
                     Destroy(piege);
                 }
             }
@@ -101,13 +101,13 @@ public class mouseLook : MonoBehaviour
             //Regen soif
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskRegenSoif) && Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                SanteJoueur.Instance.Soif = 1;
+                SanteJoueur.Instance.Eau = 1;
             }
 
             //Regen sommeil
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenSommeil) && Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                SanteJoueur.Instance.Sommeil = 1;
+                SanteJoueur.Instance.Repos = 1;
                 PlayerMovement.SpawnPoint = playerBody.position;
             }
 

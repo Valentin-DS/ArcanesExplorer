@@ -12,14 +12,15 @@ public class GameOver : MonoBehaviour
      */
     [SerializeField] Transform transformJoueur;
 
+
     /**
      * Méthode de respawn du joueur
      */
     public void Respawn()
     {
-        SanteJoueur.Instance.Faim = 1;
-        SanteJoueur.Instance.Soif = 1;
-        SanteJoueur.Instance.Sommeil = 1;
+        SanteJoueur.Instance.Nourriture = Constantes.SANTE_MAX;
+        SanteJoueur.Instance.Eau = Constantes.SANTE_MAX;
+        SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
         SanteJoueur.Instance.EstMort = false;
         GetComponent<Canvas>().gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
