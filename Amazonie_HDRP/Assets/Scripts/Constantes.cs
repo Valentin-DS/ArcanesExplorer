@@ -4,4 +4,5 @@
     public const float SANTE_MAX = 0.15f;
     public const string BRAS_ANIMATION_ALLER = "animationAller";
     public const string BRAS_ANIMATION_RETOUR = "animationRetour";
+    public const string CHILD_IMAGE = "Frame_Content";
 }

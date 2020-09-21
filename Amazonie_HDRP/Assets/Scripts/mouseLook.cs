@@ -89,12 +89,15 @@ public class mouseLook : MonoBehaviour
             //Regen faim
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenFaim) && Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                GameObject piege = hit.transform.parent.gameObject;
-                Timer timerPiege = piege.GetComponent<Timer>();
-                if (timerPiege.tempsCourant >= timerPiege.tempsLimite)
+                if (hit.transform.gameObject.name == "Piege")
                 {
-                    SanteJoueur.Instance.Nourriture = 1;
-                    Destroy(piege);
+                    GameObject piege = hit.transform.parent.gameObject;
+                    Timer timerPiege = piege.GetComponent<Timer>();
+                    if (timerPiege.tempsCourant >= timerPiege.tempsLimite)
+                    {
+                        SanteJoueur.Instance.Nourriture = Constantes.SANTE_MAX;
+                        Destroy(piege);
+                    }
                 }
             }
 
@@ -106,13 +109,12 @@ public class mouseLook : MonoBehaviour
                 {
                     SanteJoueur.Instance.Eau = 1;
                 }
-
             }
 
             //Regen sommeil
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenSommeil) && Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                SanteJoueur.Instance.Repos = 1;
+                SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
                 PlayerMovement.SpawnPoint = playerBody.position;
             }
 
@@ -134,6 +136,7 @@ public class mouseLook : MonoBehaviour
             {
                 hitsmthg = false;
             }
+
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 15, layerMaskTemple))
             {
                 if (Input.GetKeyDown(KeyCode.R) && hit.transform.name != "Levier")

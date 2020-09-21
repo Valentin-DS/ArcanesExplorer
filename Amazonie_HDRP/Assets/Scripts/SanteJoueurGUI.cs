@@ -35,6 +35,11 @@ public class SanteJoueurGUI : MonoBehaviour
      */
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SaveSystem.Load();
+        }
+
         if (!SanteJoueur.Instance.EstMort)
         {
             SanteJoueur.Instance.Nourriture -= this.coefficientFaim;
