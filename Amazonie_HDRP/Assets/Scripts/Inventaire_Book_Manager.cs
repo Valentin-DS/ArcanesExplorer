@@ -184,7 +184,8 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 object_instantiate.name = "Hache";
                 break;
             case "Pioche":
-                object_instantiate = Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, liste_Objet_Instanciable[1].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, new Quaternion(0,0.3f ,0,0), spawn_Position.transform);
+                object_instantiate.transform.localRotation = Quaternion.Euler(0, 214, 0);
                 object_instantiate.name = "Pioche";
                 break;
             case "Canne":

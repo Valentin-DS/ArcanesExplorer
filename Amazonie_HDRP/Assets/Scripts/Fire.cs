@@ -8,7 +8,7 @@ public class Fire : MonoBehaviour
     private RaycastHit hit;
     public GameObject cam;
     private Vector3 currentPosition;
-    private int layer_Terrain = 1 << 10;
+    public int layer_Terrain = 1 << 10;
     public Craft_Book_Manager craft_Book;
 
     // Start is called before the first frame update

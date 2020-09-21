@@ -99,9 +99,13 @@ public class mouseLook : MonoBehaviour
             }
 
             //Regen soif
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskRegenSoif) && Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskRegenSoif) && Input.GetKeyDown(KeyCode.E))
             {
-                SanteJoueur.Instance.Soif = 1;
+                SanteJoueur.Instance.Soif += 0.15f;
+                if (SanteJoueur.Instance.Soif >= 1)
+                {
+                    SanteJoueur.Instance.Soif = 1;
+                }
             }
 
             //Regen sommeil
