@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Experimental.TerrainAPI;
+using UnityEngine;
 using UnityEngine.UI;
 
 /**
@@ -15,15 +16,15 @@ public class SanteJoueur : MonoBehaviour
     /**
      * Faim du joueur
      */
-    public float Faim;
+    public float Nourriture;
     /**
      * Soif du joueur
      */
-    public float Soif;
+    public float Eau;
     /**
      * Sommeil du joueur
      */
-    public float Sommeil;
+    public float Repos;
     /**
      * Booléen déterminant si le joueur est mort
      */
@@ -33,6 +34,10 @@ public class SanteJoueur : MonoBehaviour
      * @see Canvas CanvasGameOver
      */
     private Color EffetFonduGameOver;
+
+    public bool ActiveAnimation;
+
+    public Animation AnimationBras;
 
     /**
      * Interface de GameOver en champ sérialisé
@@ -49,21 +54,31 @@ public class SanteJoueur : MonoBehaviour
      */
     void Start()
     {
-        Faim = 1;
-        Soif = 1;
-        Sommeil = 1;
+        Nourriture = Constantes.SANTE_MAX;
+        Eau = Constantes.SANTE_MAX;
+        Repos = Constantes.SANTE_MAX;
         EstMort = false;
         EffetFonduGameOver = new Color();
         Instance = this;
+        ActiveAnimation = false;
     }
+
+
     /**
      * Boucle principale de SanteJoueur
      */
     void Update()
     {
-        if(Faim <= 0 || Soif <= 0 || Sommeil <= 0)
+        if(Nourriture <= 0 || Eau <= 0 || Repos <= 0)
         {
             EstMort = true;
+            if (HUD.Instance.AnimationJouee && AnimationBras.clip == AnimationBras.GetClip(Constantes.BRAS_ANIMATION_ALLER))
+            {
+                AnimationBras.clip = AnimationBras.GetClip(Constantes.BRAS_ANIMATION_RETOUR);
+                AnimationBras.Play();
+                HUD.Instance.AnimationJouee = false;
+            }
+
             PlayerMovement.BloqueMouvement = true;
             if (EffetFonduGameOver.a < 1)
             {
@@ -72,7 +87,7 @@ public class SanteJoueur : MonoBehaviour
             }
             else
             {
-                //PlayerMovement.ARespawn = true;
+                PlayerMovement.ARespawn = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 CanvasGameOver.gameObject.SetActive(true);
