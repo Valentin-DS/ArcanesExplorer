@@ -7,6 +7,7 @@
  */
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
     /**
      * Collider du joueur
      */
@@ -88,12 +89,18 @@ public class PlayerMovement : MonoBehaviour
         SpawnPoint = new Vector3(1050, 4, 415);
         BruitagePas = GetComponent<AudioSource>();
         enMouvement = false;
+        Instance = this;
     }
     /**
      * Boucle principale de PlayerMovement
      */
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.RightControl))
+        {
+            SaveSystem.Save();
+        }
+
         if (!BloqueMouvement)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -137,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     inventaire_Player.ajout_Ingredient_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
                 }
+
                 Destroy(mouseLook.objectHitName.transform.gameObject);
             }
             #endregion

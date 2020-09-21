@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Craft_Book_Manager : MonoBehaviour
 {
+    public static Craft_Book_Manager Instance { get; private set; }
+
     public GameObject canvas_Abris_GUI;
     public GameObject canvas_Outils_GUI;
     public GameObject canvas_Autres_GUI;
@@ -18,6 +20,11 @@ public class Craft_Book_Manager : MonoBehaviour
     public GameObject texte_Ingredient_Manquant;
     public List<GameObject> liste_Recette = new List<GameObject>();
     public List<objet_Craftable> liste_Objet_Recette = new List<objet_Craftable>();
+
+    private void Start()
+    {
+        Instance = this;
+    }
 
     //Affichage des bons onglets d'objets à craft
     public void canvas_Abri()

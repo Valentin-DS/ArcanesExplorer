@@ -10,8 +10,9 @@ using System.Collections;
 * */
 public class Inventaire : MonoBehaviour
 {
-    public List<Texture> liste_Sprite = new List<Texture>();
+    public static Inventaire Instance;
 
+    public List<Texture> liste_Sprite = new List<Texture>();
     public List<objet_Inventaire> liste_Ingredient_Inventaire = new List<objet_Inventaire>();
     public List<objet_Inventaire> liste_Objet_Inventaire = new List<objet_Inventaire>();
     public List<objet_Inventaire> liste_Outil_Inventaire = new List<objet_Inventaire>();
@@ -19,8 +20,12 @@ public class Inventaire : MonoBehaviour
     private int taille_Ingredient_Inventaire_Max = 50;
     private int taille_Objet_Inventaire_Max = 20;
     private int taille_Outil_Inventaire_Max = 20;
-
     public GameObject texte_Surcharge;
+
+    private void Start()
+    {
+        Instance = this;
+    }
 
     public void ajout_Ingredient_Inventaire(string name_Inventaire)
     {
@@ -50,6 +55,8 @@ public class Inventaire : MonoBehaviour
             item.quantite_Actuelle = 1;
             item.quantite_Maximal = 5;
             item.image_Objet = insert_Sprite(name_Inventaire);
+            if (item.nom_Objet.Equals("Piege"))
+                item.nom_Objet = "Raw_Chicken";
             liste_Ingredient_Inventaire.Add(item);
         }
         else if(ajout == false && liste_Ingredient_Inventaire.Count == taille_Ingredient_Inventaire_Max)
@@ -57,6 +64,12 @@ public class Inventaire : MonoBehaviour
             texte_Surcharge.SetActive(false);
             texte_Surcharge.SetActive(true);
             StartCoroutine(disable_Text_Overload());
+        }
+
+        if(name_Inventaire.Equals("Berries") && !MissionGUI.Instance.Missions[0].GoalsAchievement[0])
+        {
+            MissionGUI.Instance.Missions[0].GoalsAchievement[0] = true;
+            MissionGUI.Instance.UpdatePanel();
         }
     }
 
@@ -203,6 +216,15 @@ public class Inventaire : MonoBehaviour
                 break;
             case "Liane":
                 sprite_Finale = liste_Sprite[2];
+                break;
+            case "Berries":
+                sprite_Finale = liste_Sprite[3];
+                break;
+            case "Piege":
+                sprite_Finale = liste_Sprite[4]; //donne automatiquement du poulet cru
+                break;
+            case "Roasted_Chicken":
+                sprite_Finale = liste_Sprite[5];
                 break;
         }
         return sprite_Finale;
