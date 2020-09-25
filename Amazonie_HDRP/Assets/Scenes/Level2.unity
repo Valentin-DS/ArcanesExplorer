@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &24904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95813,15 +95813,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3343ae201a0d24cb6e06db2dd86bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JaugeFaim: {fileID: 1057692280}
-  JaugeSoif: {fileID: 2068794627}
-  JaugeSommeil: {fileID: 1007769833}
-  ContenuJaugeFaim: {fileID: 345133783}
-  ContenuJaugeSoif: {fileID: 838606622}
-  ContenuJaugeSommeil: {fileID: 2035979205}
-  CoefficientFaim: 0
-  CoefficientSoif: 0
-  CoefficientSommeil: 0
+  fondJaugeNourriture: {fileID: 0}
+  fondJaugeEau: {fileID: 0}
+  fondJaugeRepos: {fileID: 0}
+  contenuJaugeNourriture: {fileID: 0}
+  contenuJaugeEau: {fileID: 0}
+  contenuJaugeRepos: {fileID: 0}
 --- !u!114 &1586690962
 MonoBehaviour:
   m_ObjectHideFlags: 0

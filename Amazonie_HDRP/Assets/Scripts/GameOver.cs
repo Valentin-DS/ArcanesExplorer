@@ -22,6 +22,7 @@ public class GameOver : MonoBehaviour
         SanteJoueur.Instance.Eau = Constantes.SANTE_MAX;
         SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
         SanteJoueur.Instance.EstMort = false;
+        PlayerMovement.Instance.velocity.y = 0;
         GetComponent<Canvas>().gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

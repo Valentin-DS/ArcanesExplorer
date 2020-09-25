@@ -29,6 +29,7 @@ public class Inventaire : MonoBehaviour
 
     public void ajout_Ingredient_Inventaire(string name_Inventaire)
     {
+        Debug.Log(name_Inventaire);
         bool ajout = false;
 
         //On parcours la liste des ingrédients 

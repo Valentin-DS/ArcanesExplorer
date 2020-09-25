@@ -28,7 +28,7 @@ public class Graine : MonoBehaviour
                     
                     //Supprimer la graine de l'inventaire
                     bool result = inventaire_Joueur.check_Ingredient_Quantity("Graine");
-                    Debug.Log(result);
+                    // Debug.Log(result);
                     if (!result)
                     {
                         Destroy(this.gameObject);

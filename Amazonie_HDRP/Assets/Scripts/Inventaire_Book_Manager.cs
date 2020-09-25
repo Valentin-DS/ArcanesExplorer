@@ -8,25 +8,24 @@ using UnityEngine.EventSystems;
 
 public class Inventaire_Book_Manager : MonoBehaviour
 {
+    public static Inventaire_Book_Manager Instance { get; private set; }
+
     public GameObject canvas_Inventaire;
-
     public Inventaire inventaire_Player;
-
     public GameObject spawn_Position;
-
     public SanteJoueur sante_Joueur;
-
     public List<GameObject> liste_Ingredient_RawImage = new List<GameObject>();
     public List<GameObject> liste_Outil_RawImage = new List<GameObject>();
     public List<GameObject> liste_Objet_RawImage = new List<GameObject>();
-
     public GameObject options_Inventaire;
-
     public List<GameObject> liste_Objet_Instanciable = new List<GameObject>();
-
     public int objet_Selectionne;
     public string objet_Categorie;
 
+    private void Start()
+    {
+        Instance = this;
+    }
     public void canvas_Inventaire_Active()
     {
         if (canvas_Inventaire.activeInHierarchy)
@@ -38,14 +37,16 @@ public class Inventaire_Book_Manager : MonoBehaviour
             unload_Objet_Inventaire();
             unload_Outil_Inventaire();
             canvas_Inventaire.SetActive(false);
+            PlayerMovement.BloqueMouvement = false;
         }
-        else
+        else if(!PlayerMovement.Instance.craft_Livre_Canvas.activeInHierarchy)
         {
             
             load_Ingredient_Inventaire();
             load_Outil_Inventaire();
             load_Objet_Inventaire();
             canvas_Inventaire.SetActive(true);
+            PlayerMovement.BloqueMouvement = true;
         }
     }
 

@@ -37,6 +37,7 @@ public class HUD : MonoBehaviour
                 AnimationJouee = false;
                 animationBras.clip = animationBras.GetClip(Constantes.BRAS_ANIMATION_RETOUR);
             }
+
             animationBras.Play();
         }
     }

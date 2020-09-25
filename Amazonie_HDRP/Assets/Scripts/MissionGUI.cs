@@ -14,7 +14,7 @@ public class MissionGUI : MonoBehaviour
     private int missionNumber;
     private float alphaFrameContent;
 
-    public int MissionNumber { get => missionNumber; }
+    public int MissionNumber { get => missionNumber; set => missionNumber = value; }
 
     private void Start()
     {
