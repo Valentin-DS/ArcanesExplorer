@@ -174,18 +174,21 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 objet_Used = inventaire_Player.liste_Outil_Inventaire[objet_Selectionne].nom_Objet;
                 break;
         }
+
         //On instancie dans le jeu l'objet choisi pour êter utilisé
         GameObject object_instantiate;
+        Debug.Log(objet_Used);
         switch (objet_Used)
             {
              //Revoir la position de l'instanciation pour les outils
             case "Hache":
-                object_instantiate = Instantiate(liste_Objet_Instanciable[0], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[0], spawn_Position.transform.position, new Quaternion(0, 0.3f, 0, 0), spawn_Position.transform);
+                object_instantiate.transform.localRotation = Quaternion.Euler(0, -220, 0);
                 object_instantiate.name = "Hache";
                 break;
             case "Pioche":
                 object_instantiate = Instantiate(liste_Objet_Instanciable[1], spawn_Position.transform.position, new Quaternion(0,0.3f ,0,0), spawn_Position.transform);
-                object_instantiate.transform.localRotation = Quaternion.Euler(0, 214, 0);
+                object_instantiate.transform.localRotation = Quaternion.Euler(0, 220, 0);
                 object_instantiate.name = "Pioche";
                 break;
             case "Canne":
@@ -193,38 +196,39 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 object_instantiate.name = "Canne";
                 break;
             //On instancie les objets à placer sachant qu'ils ont un script qui gère leur positionnement au bout du raycast du joueur
-            case "Piege":
-                object_instantiate = Instantiate(liste_Objet_Instanciable[3], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
-                break;
-            case "Feu":
+          /*  case "Piege":
+                object_instantiate = Instantiate(liste_Objet_Instanciable[4], Vector3.zero, liste_Objet_Instanciable[3].transform.rotation);
+                break;*/
+            /*case "Feu":
                 jeter_Objet();
-                Instantiate(liste_Objet_Instanciable[4], Vector3.zero, liste_Objet_Instanciable[4].transform.rotation);
-                break;
-            case "Lit":
+                Instantiate(liste_Objet_Instanciable[5], Vector3.zero, liste_Objet_Instanciable[4].transform.rotation);
+                break;*/
+           /* case "Lit":
                 jeter_Objet();
-                Instantiate(liste_Objet_Instanciable[5], Vector3.zero, liste_Objet_Instanciable[5].transform.rotation);
-                break;
-            case "Coffre":
-                jeter_Objet();
-                Instantiate(liste_Objet_Instanciable[6], Vector3.zero, liste_Objet_Instanciable[6].transform.rotation);
-                break;
+                Instantiate(liste_Objet_Instanciable[6], Vector3.zero, liste_Objet_Instanciable[5].transform.rotation);
+                break;*/
             case "Gourde":
-                jeter_Objet();
-                Instantiate(liste_Objet_Instanciable[7], spawn_Position.transform.position, liste_Objet_Instanciable[7].transform.rotation);
+                Instantiate(liste_Objet_Instanciable[6], spawn_Position.transform.position, liste_Objet_Instanciable[7].transform.rotation);
                 break;
             case "Graine":
-                Instantiate(liste_Objet_Instanciable[8], spawn_Position.transform.position, Quaternion.identity, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[7], spawn_Position.transform.position, Quaternion.identity, spawn_Position.transform);
                 unload_Ingredient_Inventaire();
                 load_Ingredient_Inventaire();
                 break;
             case "Houe":
-                object_instantiate = Instantiate(liste_Objet_Instanciable[9], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate = Instantiate(liste_Objet_Instanciable[8], spawn_Position.transform.position, liste_Objet_Instanciable[0].transform.rotation, spawn_Position.transform);
+                object_instantiate.transform.localRotation = Quaternion.Euler(0, 290, 0);
                 object_instantiate.name = "Houe";
                 break;
             case "Patate":
                 inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;
                 inventaire_Player.clear_Inventaire();
-                sante_Joueur.Nourriture += 0.1f;
+                sante_Joueur.Nourriture += 0.01f;
+                break;
+            case "Viande_Crue":
+                inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;
+                inventaire_Player.clear_Inventaire();
+                sante_Joueur.Nourriture += 0.02f;
                 break;
         }
         

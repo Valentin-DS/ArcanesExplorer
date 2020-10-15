@@ -50,9 +50,7 @@ public class Foundation : MonoBehaviour
             craft_Book.clear_Inventaire();
             BuildingManager.object_Actual = null;
             BuildingManager.isBuilding = false;
-            BuildingManager.object_Actual = null;
             this.GetComponent<Renderer>().material = material_Foundation;
-            BuildingManager.isBuilding = false;
             this.enabled = false;
         }
         //Retire le snap si on s'éloigne trop de l'objet

@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 5235383328286399645}
   - component: {fileID: 6747478707855249298}
   - component: {fileID: 3655805764937557458}
-  m_Layer: 21
+  m_Layer: 19
   m_Name: Collider_Pillier_H_D
   m_TagString: ColliderPilier
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 7772836125309339452}
   - component: {fileID: 1321832886940978943}
   - component: {fileID: 4648234821277019450}
-  m_Layer: 21
+  m_Layer: 19
   m_Name: Collider_Pillier_B_D
   m_TagString: ColliderPilier
   m_Icon: {fileID: 0}
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 9217356825935067893}
   - component: {fileID: 6196929728840814078}
   - component: {fileID: 6581045272799788611}
-  m_Layer: 21
+  m_Layer: 19
   m_Name: Collider_Pillier_H_G
   m_TagString: ColliderPilier
   m_Icon: {fileID: 0}
@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 6865768343433928244}
   - component: {fileID: 5683459188285519697}
   - component: {fileID: 7113669199475460079}
-  m_Layer: 21
+  m_Layer: 19
   m_Name: Collider_Pillier_B_G
   m_TagString: ColliderPilier
   m_Icon: {fileID: 0}

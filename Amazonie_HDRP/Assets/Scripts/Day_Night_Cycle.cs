@@ -10,7 +10,7 @@ public class Day_Night_Cycle : MonoBehaviour
     [SerializeField] private Light moon;
     [SerializeField] private float secondsInFullDay = 120f;
 
-    [SerializeField] private float currentTimeOfDay = 0;
+    [SerializeField] public float currentTimeOfDay = 0;
 
     private float timeMultiplier = 1f;
     private float sunInitialIntensity;
@@ -176,7 +176,6 @@ public class Day_Night_Cycle : MonoBehaviour
             if (!stop_degrade)
             {
                 float fracJourney = 1 - (0.875f - currentTimeOfDay) / 0.25f;
-                Debug.Log("Degradé de la couleur de la nuit : " + fracJourney);
                 test.top.value = Color.Lerp(color_Day_Top, color_Night_Top, fracJourney);
                 test.middle.value = Color.Lerp(color_Day_Middle, color_Night_Middle, fracJourney);
                 test.bottom.value = Color.Lerp(color_Day_Bottom, color_Night_Bottom, fracJourney);
@@ -300,7 +299,7 @@ public class Day_Night_Cycle : MonoBehaviour
         sun.intensity = sunInitialIntensity * intensityMultiplier;
     }
 
-    private void Future_Weather()
+    public void Future_Weather()
     {
         //Remise à zéro des éléments météo
         rain_Presence = false;
@@ -330,6 +329,52 @@ public class Day_Night_Cycle : MonoBehaviour
             myst_Presence = true;
             myst_start_Time = Random.Range(0f, 60f) / 100;
             myst_time = Random.Range(20f, 50f) / 100;
+        }
+    }
+
+    public void generateDayAfterSleep()
+    {
+        if (currentTimeOfDay >= 0.125f && currentTimeOfDay <= 0.375f)
+        {
+            if (particle_Clouds_Day.activeInHierarchy == false && particle_Clouds_Rain.activeInHierarchy == false)
+            {
+                particle_Clouds_Day.SetActive(true);
+                particle_Clouds_Night.SetActive(false);
+            }
+            if (!stop_degrade)
+            {
+                if (prec_Light)
+                {
+                    float fracJourney = 1 - (0.375f - currentTimeOfDay) / 0.25f;
+                    test.top.value = Color.Lerp(color_Lightning_Top, color_Day_Top, fracJourney);
+                    test.middle.value = Color.Lerp(color_Lightning_Middle, color_Day_Middle, fracJourney);
+                    test.bottom.value = Color.Lerp(color_Lightning_Bottom, color_Day_Bottom, fracJourney);
+                }
+                else
+                {
+                    float fracJourney = 1 - (0.375f - currentTimeOfDay) / 0.25f;
+                    test.top.value = Color.Lerp(color_Night_Top, color_Day_Top, fracJourney);
+                    test.middle.value = Color.Lerp(color_Night_Middle, color_Day_Middle, fracJourney);
+                    test.bottom.value = Color.Lerp(color_Night_Bottom, color_Day_Bottom, fracJourney);
+                }
+            }
+        }
+
+        //Periode de la nuit gérant le dégradé du ciel
+        else if (currentTimeOfDay >= 0.625f && currentTimeOfDay <= 0.875f)
+        {
+            if (particle_Clouds_Night.activeInHierarchy == false && particle_Clouds_Rain.activeInHierarchy == false)
+            {
+                particle_Clouds_Night.SetActive(true);
+                particle_Clouds_Day.SetActive(false);
+            }
+            if (!stop_degrade)
+            {
+                float fracJourney = 1 - (0.875f - currentTimeOfDay) / 0.25f;
+                test.top.value = Color.Lerp(color_Day_Top, color_Night_Top, fracJourney);
+                test.middle.value = Color.Lerp(color_Day_Middle, color_Night_Middle, fracJourney);
+                test.bottom.value = Color.Lerp(color_Day_Bottom, color_Night_Bottom, fracJourney);
+            }
         }
     }
 }

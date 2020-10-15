@@ -9,8 +9,12 @@ public class BuildingManager : MonoBehaviour
     public GameObject foundationPrefab;
     public GameObject pilierPrefab;
     public GameObject wallPrefab;
-    public GameObject feu_Prefab;
-    public GameObject piege_Prefab;
+    public GameObject feuPrefab;
+    public GameObject piegePrefab;
+    public GameObject litPrefab;
+    public GameObject coffrePrefab;
+    public GameObject portePrefab;
+    public GameObject escalierPrefab;
 
     public static GameObject object_Actual;
 
@@ -68,6 +72,7 @@ public class BuildingManager : MonoBehaviour
                 }
                 break;
             case "Pilier":
+                Debug.Log("ok");
                 isBuilding = true;
                 object_Actual = Instantiate(pilierPrefab, Vector3.zero, pilierPrefab.transform.rotation);
                 liste_Affichage_Collider = GameObject.FindGameObjectsWithTag("ColliderPilier");
@@ -78,8 +83,12 @@ public class BuildingManager : MonoBehaviour
                 }
                 break;
             case "Porte":
+                isBuilding = true;
+                object_Actual = Instantiate(portePrefab, Vector3.zero, portePrefab.transform.rotation);
                 break;
             case "Escalier":
+                isBuilding = true;
+                object_Actual = Instantiate(escalierPrefab, Vector3.zero, escalierPrefab.transform.rotation);
                 break;
             case "Pioche":
                 craft_Book.delete_Ingredient();
@@ -98,21 +107,25 @@ public class BuildingManager : MonoBehaviour
                 break;
             case "Piege":
                 isBuilding = true;
-                object_Actual = Instantiate(piege_Prefab, Vector3.zero, piege_Prefab.transform.rotation);
+                object_Actual = Instantiate(piegePrefab, Vector3.zero, piegePrefab.transform.rotation);
                 object_Actual.name = "Viande_Crue";
                 break;
             case "Feu":
                 isBuilding = true;
-                object_Actual = Instantiate(feu_Prefab, Vector3.zero, feu_Prefab.transform.rotation);
+                object_Actual = Instantiate(feuPrefab, Vector3.zero, feuPrefab.transform.rotation);
                 break;
             case "Lit":
-                inventaire_Player.ajout_Objet_Inventaire("Lit");
+                isBuilding = true;
+                object_Actual = Instantiate(litPrefab, Vector3.zero, litPrefab.transform.rotation);
                 break;
             case "Coffre":
-                inventaire_Player.ajout_Objet_Inventaire("Coffre");
+                isBuilding = true;
+                object_Actual = Instantiate(coffrePrefab, Vector3.zero, coffrePrefab.transform.rotation);
                 break;
             case "Gourde":
-                inventaire_Player.ajout_Objet_Inventaire("Gourde");
+                craft_Book.delete_Ingredient();
+                craft_Book.clear_Inventaire();
+                inventaire_Player.ajout_Outil_Inventaire("Gourde");
                 break;
             case "Houe":
                 craft_Book.delete_Ingredient();

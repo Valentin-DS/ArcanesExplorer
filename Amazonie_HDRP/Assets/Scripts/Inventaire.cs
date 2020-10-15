@@ -179,6 +179,7 @@ public class Inventaire : MonoBehaviour
             return false;
         }
     }
+
     public void clear_Inventaire()
     {
         for(int i = 0; i < liste_Ingredient_Inventaire.Count; i++)
@@ -203,6 +204,7 @@ public class Inventaire : MonoBehaviour
             }
         }
     }
+
     public Texture insert_Sprite(string name_Object)
     {
         Texture sprite_Finale = null;
@@ -223,8 +225,32 @@ public class Inventaire : MonoBehaviour
             case "Piege":
                 sprite_Finale = liste_Sprite[4]; //donne automatiquement du poulet cru
                 break;
-            case "Roasted_Chicken":
+            case "Viande_Crue":
                 sprite_Finale = liste_Sprite[5];
+                break;
+            case "Graine":
+                sprite_Finale = liste_Sprite[6];
+                break;
+            case "Pierre":
+                sprite_Finale = liste_Sprite[7];
+                break;
+            case "Patate":
+                sprite_Finale = liste_Sprite[8];
+                break;
+            case "Pioche":
+                sprite_Finale = liste_Sprite[9];
+                break;
+            case "Hache":
+                sprite_Finale = liste_Sprite[10];
+                break;
+            case "Canne":
+                sprite_Finale = liste_Sprite[11];
+                break;
+            case "Houe":
+                sprite_Finale = liste_Sprite[12];
+                break;
+            case "Gourde":
+                sprite_Finale = liste_Sprite[13];
                 break;
         }
         return sprite_Finale;

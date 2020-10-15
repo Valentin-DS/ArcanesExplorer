@@ -60,6 +60,7 @@ public class mouseLook : MonoBehaviour
     public GameObject laser;
     private AudioSource BruitageRotationColonne;
 
+    public Day_Night_Cycle cycleJour;
    
     /**
      * Initialisation des paramètres
@@ -86,21 +87,6 @@ public class mouseLook : MonoBehaviour
         RaycastHit hit;
         if (!BuildingManager.isBuilding)
         {
-            //Regen faim
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenFaim) && Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                if (hit.transform.gameObject.name == "Piege")
-                {
-                    GameObject piege = hit.transform.parent.gameObject;
-                    Timer timerPiege = piege.GetComponent<Timer>();
-                    if (timerPiege.tempsCourant >= timerPiege.tempsLimite)
-                    {
-                        SanteJoueur.Instance.Nourriture = Constantes.SANTE_MAX;
-                        Destroy(piege);
-                    }
-                }
-            }
-
             //Regen soif
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskRegenSoif) && Input.GetKeyDown(KeyCode.E))
             {
@@ -112,10 +98,40 @@ public class mouseLook : MonoBehaviour
             }
 
             //Regen sommeil
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenSommeil) && Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMaskRegenSommeil) && Input.GetKeyDown(KeyCode.E))
             {
-                SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
-                PlayerMovement.SpawnPoint = playerBody.position;
+                if(cycleJour.currentTimeOfDay >= 0.75f && cycleJour.currentTimeOfDay <= 0.2f)
+                {
+                    cycleJour.currentTimeOfDay = cycleJour.currentTimeOfDay + 0.5f;
+                    if (cycleJour.currentTimeOfDay > 1)
+                    {
+                        cycleJour.Future_Weather();
+                        cycleJour.currentTimeOfDay -= 1;
+                    }
+                    cycleJour.generateDayAfterSleep();
+                    SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
+                    PlayerMovement.SpawnPoint = playerBody.position;
+                }
+                else
+                {
+                    cycleJour.currentTimeOfDay = cycleJour.currentTimeOfDay + 0.5f;
+                    if(cycleJour.currentTimeOfDay > 1)
+                    {
+                        cycleJour.Future_Weather();
+                        cycleJour.currentTimeOfDay -= 1;
+                    }
+                    cycleJour.generateDayAfterSleep();
+                    if (SanteJoueur.Instance.Repos + Constantes.SANTE_MAX / 2 > Constantes.SANTE_MAX)
+                    {
+                        SanteJoueur.Instance.Repos = Constantes.SANTE_MAX;
+                    }
+                    else
+                    {
+                        SanteJoueur.Instance.Repos += Constantes.SANTE_MAX / 2;
+                    }
+                    PlayerMovement.SpawnPoint = playerBody.position;
+                }
+                
             }
 
             //Terrain (Craft)
