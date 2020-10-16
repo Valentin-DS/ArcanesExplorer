@@ -61,6 +61,9 @@ public class SanteJoueur : MonoBehaviour
         EffetFonduGameOver = new Color();
         Instance = this;
         ActiveAnimation = false;
+        this.CanvasPrincipal.transform.Find("Missions").gameObject.SetActive(true);
+        CanvasPrincipal.GetComponentInChildren<Image>().color = EffetFonduGameOver;
+        EffetFonduGameOver.a = 0f;
     }
 
 
@@ -72,37 +75,49 @@ public class SanteJoueur : MonoBehaviour
         if(Nourriture <= 0 || Eau <= 0 || Repos <= 0)
         {
             this.EstMort = true;
+            valideMort();
         }
 
-        if (this.EstMort)
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            activeEnigme();
+        }
+    }
+
+
+    private void valideMort()
+    {
+        if (HUD.Instance.AnimationJouee && AnimationBras.clip == AnimationBras.GetClip(Constantes.BRAS_ANIMATION_ALLER))
+        {
+            AnimationBras.clip = AnimationBras.GetClip(Constantes.BRAS_ANIMATION_RETOUR);
+            AnimationBras.Play();
+            HUD.Instance.AnimationJouee = false;
+        }
+
+        PlayerMovement.BloqueMouvement = true;
+        if (EffetFonduGameOver.a < 1)
+        {
+            CanvasPrincipal.GetComponentInChildren<Image>().color = EffetFonduGameOver;
+            EffetFonduGameOver.a += 0.01f;
+        }
+        else
+        {
+            PlayerMovement.ARespawn = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            CanvasGameOver.gameObject.SetActive(true);
+        }
+    }
+
+    private void activeEnigme()
+    {
+        if (this.CanvasPrincipal.transform.Find("Missions").gameObject.activeInHierarchy)
         {
             this.CanvasPrincipal.transform.Find("Missions").gameObject.SetActive(false);
-            if (HUD.Instance.AnimationJouee && AnimationBras.clip == AnimationBras.GetClip(Constantes.BRAS_ANIMATION_ALLER))
-            {
-                AnimationBras.clip = AnimationBras.GetClip(Constantes.BRAS_ANIMATION_RETOUR);
-                AnimationBras.Play();
-                HUD.Instance.AnimationJouee = false;
-            }
-
-            PlayerMovement.BloqueMouvement = true;
-            if (EffetFonduGameOver.a < 1)
-            {
-                CanvasPrincipal.GetComponentInChildren<Image>().color = EffetFonduGameOver;
-                EffetFonduGameOver.a += 0.01f;
-            }
-            else
-            {
-                PlayerMovement.ARespawn = true;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                CanvasGameOver.gameObject.SetActive(true);
-            }
         }
         else
         {
             this.CanvasPrincipal.transform.Find("Missions").gameObject.SetActive(true);
-            CanvasPrincipal.GetComponentInChildren<Image>().color = EffetFonduGameOver;
-            EffetFonduGameOver.a = 0f;
         }
     }
 }

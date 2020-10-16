@@ -23,6 +23,7 @@ public class destructive_Arbre : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if(other.gameObject.name == "Hache" && other.GetComponent<Animation>().isPlaying && point_Vie_Arbre >0)
         {
             point_Vie_Arbre--;
@@ -43,9 +44,10 @@ public class destructive_Arbre : MonoBehaviour
 
     private void creation_Buche()
     {
+        Debug.Log(this.transform.position.y);
         for (int i = 0; i < 3; i++)
         {
-            Vector3 positionBois = new Vector3(Random.Range(this.transform.position.x - 5, this.transform.position.x + 5), 0, Random.Range(this.transform.position.z - 5, this.transform.position.z + 5));
+            Vector3 positionBois = new Vector3(Random.Range(this.transform.position.x - 5, this.transform.position.x + 5), this.transform.position.y + 3, Random.Range(this.transform.position.z - 5, this.transform.position.z + 5));
             GameObject nouvelObjet = Instantiate(objet_Buche, positionBois, objet_Buche.transform.rotation);
             nouvelObjet.name = "Bois";
         }

@@ -67,11 +67,7 @@ public class Inventaire : MonoBehaviour
             StartCoroutine(disable_Text_Overload());
         }
 
-        if(name_Inventaire.Equals("Berries") && !MissionGUI.Instance.Missions[0].GoalsAchievement[0])
-        {
-            MissionGUI.Instance.Missions[0].GoalsAchievement[0] = true;
-            MissionGUI.Instance.UpdatePanel();
-        }
+       
     }
 
     public void ajout_Objet_Inventaire(string name_Object)
@@ -92,6 +88,11 @@ public class Inventaire : MonoBehaviour
         if (name_Object == "Patate")
         {
             ajout_Ingredient_Inventaire("Graine");
+        }
+        if (name_Object.Equals("Berries") && !MissionGUI.Instance.Missions[0].GoalsAchievement[0])
+        {
+            MissionGUI.Instance.Missions[0].GoalsAchievement[0] = true;
+            MissionGUI.Instance.UpdatePanel();
         }
         if (ajout == false && liste_Objet_Inventaire.Count < taille_Objet_Inventaire_Max)
         {

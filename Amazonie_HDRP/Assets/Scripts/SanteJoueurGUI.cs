@@ -25,9 +25,9 @@ public class SanteJoueurGUI : MonoBehaviour
      */
     void Start()
     {
-        this.coefficientFaim = 0.00002f;
-        this.coefficientSoif = 0.00004f;
-        this.coefficientSommeil = 0.00001f;
+        this.coefficientFaim = 0.0000042f;
+        this.coefficientSoif = 0.0000085f;
+        this.coefficientSommeil = 0.0000035f;
     }
 
     /**

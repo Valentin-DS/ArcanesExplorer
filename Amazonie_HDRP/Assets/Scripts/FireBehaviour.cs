@@ -27,7 +27,6 @@ public class FireBehaviour : MonoBehaviour
                 {
                     Inventaire.Instance.liste_Ingredient_Inventaire.Remove(food);
                 }
-
                 //Au bout de 5 secondes, on appelle la methode Cook qui détermine si le poulet est cuit ou non
                 Invoke("Cook", 5f);
             }

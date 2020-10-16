@@ -18,5 +18,5 @@ MonoBehaviour:
   - Manger les baies
   - Trouver un point d'eau
   - Boire
-  GoalsAchievement: 01000000
+  GoalsAchievement: 01010000
   IsCompleted: 0

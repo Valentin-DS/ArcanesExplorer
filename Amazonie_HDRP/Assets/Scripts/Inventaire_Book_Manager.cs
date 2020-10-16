@@ -231,6 +231,13 @@ public class Inventaire_Book_Manager : MonoBehaviour
                 inventaire_Player.clear_Inventaire();
                 sante_Joueur.Nourriture += 0.02f;
                 break;
+            case "Berries":
+                MissionGUI.Instance.Missions[0].GoalsAchievement[1] = true;
+                MissionGUI.Instance.UpdatePanel();
+                inventaire_Player.liste_Objet_Inventaire[objet_Selectionne].quantite_Actuelle--;
+                inventaire_Player.clear_Inventaire();
+                sante_Joueur.Nourriture += 0.01f;
+                break;
         }
         
         options_Inventaire.SetActive(false);

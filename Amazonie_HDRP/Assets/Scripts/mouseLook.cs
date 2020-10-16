@@ -90,10 +90,13 @@ public class mouseLook : MonoBehaviour
             //Regen soif
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10, layerMaskRegenSoif) && Input.GetKeyDown(KeyCode.E))
             {
-                SanteJoueur.Instance.Eau += 0.15f;
-                if (SanteJoueur.Instance.Eau >= 1)
+                MissionGUI.Instance.Missions[0].GoalsAchievement[2] = true;
+                MissionGUI.Instance.Missions[0].GoalsAchievement[3] = true;
+                MissionGUI.Instance.UpdatePanel();
+                SanteJoueur.Instance.Eau += Constantes.SANTE_MAX/6;
+                if (SanteJoueur.Instance.Eau >= Constantes.SANTE_MAX)
                 {
-                    SanteJoueur.Instance.Eau = 1;
+                    SanteJoueur.Instance.Eau = Constantes.SANTE_MAX;
                 }
             }
 
