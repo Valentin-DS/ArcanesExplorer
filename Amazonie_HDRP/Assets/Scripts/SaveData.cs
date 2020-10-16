@@ -7,6 +7,8 @@ public class SaveData
     public float playerFood;
     public float playerWater;
     public float playerRest;
+    public int currentMissionNumber;
+    public bool[] goals;
     /*
     public List<float[]> trapsLocation;
     public float[] trapsRegenTime;
@@ -15,6 +17,8 @@ public class SaveData
     public List<float[]> loggingTreesLocation;
     public float[] loggingTreesRegenTime;
     */
+
+    //Sauvegarder objectifs/Missions
     public string[] ingredients;
     public int[] ingredientsAmounts;
     public string[] objects;
@@ -31,6 +35,15 @@ public class SaveData
         this.playerFood = SanteJoueur.Instance.Nourriture;
         this.playerWater = SanteJoueur.Instance.Eau;
         this.playerRest = SanteJoueur.Instance.Repos;
+        for (int i = 0; i < MissionGUI.Instance.Missions.Count; i++)
+        {
+            if (MissionGUI.Instance.Missions[i].IsCompleted)
+            {
+                this.currentMissionNumber++;
+            }
+        }
+
+        this.goals = MissionGUI.Instance.Missions[this.currentMissionNumber].GoalsAchievement.ToArray();
         this.ingredients = new string[Inventaire.Instance.liste_Ingredient_Inventaire.Count];
         this.ingredientsAmounts = new int[Inventaire.Instance.liste_Ingredient_Inventaire.Count];
         for (int i=0; i < Inventaire.Instance.liste_Ingredient_Inventaire.Count; i++)

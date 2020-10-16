@@ -14,7 +14,7 @@ public class AsynchronousLoading : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("okokok");
+        // Debug.Log("okokok");
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
     }
 }

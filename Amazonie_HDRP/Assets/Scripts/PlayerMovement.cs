@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     /**
      * Proprieté velocity du joueur
      */
-    Vector3 velocity;
+    public Vector3 velocity;
     /**
      * Booléen déterminant si le joueur touche le sol ou non
      */
@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
      * Booléen déterminant si le joueur est actuellement en train de se déplacer ou non
      */
     private bool enMouvement;
+
+    private bool triggerDeath;
     /**
      * Booléen déterminant si le repositionnement du joueur au point de spawn doit être effectué
      * @see Vector3 SpawnPoint
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     public Inventaire inventaire_Player;
 
     public Inventaire_Book_Manager inventaire_Book;
-    
+
     private void Start()
     {
         ARespawn = false;
@@ -90,13 +92,14 @@ public class PlayerMovement : MonoBehaviour
         BruitagePas = GetComponent<AudioSource>();
         enMouvement = false;
         Instance = this;
+        this.triggerDeath = false;
     }
     /**
      * Boucle principale de PlayerMovement
      */
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightControl))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             SaveSystem.Save();
         }
@@ -104,18 +107,24 @@ public class PlayerMovement : MonoBehaviour
         if (!BloqueMouvement)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-            if (isGrounded && velocity.y < 0)
-            {
-                velocity.y = -2f;
-            }
-
             #region Mouvement
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             enMouvement = x > 0 || z > 0;
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
-            velocity.y += gravity * Time.deltaTime;
+            if (!this.isGrounded)
+            {
+                velocity.y += gravity * Time.deltaTime;
+            }
+            else
+            {            
+                if (velocity.y <= -20f)
+                {
+                    SanteJoueur.Instance.EstMort = true;
+                }
+            }
+
             controller.Move(velocity * Time.deltaTime);
             #endregion
 
@@ -136,11 +145,11 @@ public class PlayerMovement : MonoBehaviour
             #region Récupération objets
             if (Input.GetKeyDown(KeyCode.E) && mouseLook.hitsmthg)
             {
-                if(mouseLook.objectHitName.transform.gameObject.tag == "Objet")
+                if (mouseLook.objectHitName.transform.gameObject.tag == "Objet")
                 {
                     inventaire_Player.ajout_Objet_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
                 }
-                else if(mouseLook.objectHitName.transform.gameObject.tag == "Ingredient")
+                else if (mouseLook.objectHitName.transform.gameObject.tag == "Ingredient")
                 {
                     inventaire_Player.ajout_Ingredient_Inventaire(mouseLook.objectHitName.transform.gameObject.name);
                 }
@@ -168,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
                 BloqueMouvement = false;
                 craft_Livre_Canvas.SetActive(false);
             }
-            else
+            else if (!Inventaire_Book_Manager.Instance.canvas_Inventaire.activeInHierarchy)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;

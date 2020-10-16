@@ -71,7 +71,12 @@ public class SanteJoueur : MonoBehaviour
     {
         if(Nourriture <= 0 || Eau <= 0 || Repos <= 0)
         {
-            EstMort = true;
+            this.EstMort = true;
+        }
+
+        if (this.EstMort)
+        {
+            this.CanvasPrincipal.transform.Find("Missions").gameObject.SetActive(false);
             if (HUD.Instance.AnimationJouee && AnimationBras.clip == AnimationBras.GetClip(Constantes.BRAS_ANIMATION_ALLER))
             {
                 AnimationBras.clip = AnimationBras.GetClip(Constantes.BRAS_ANIMATION_RETOUR);
@@ -95,6 +100,7 @@ public class SanteJoueur : MonoBehaviour
         }
         else
         {
+            this.CanvasPrincipal.transform.Find("Missions").gameObject.SetActive(true);
             CanvasPrincipal.GetComponentInChildren<Image>().color = EffetFonduGameOver;
             EffetFonduGameOver.a = 0f;
         }

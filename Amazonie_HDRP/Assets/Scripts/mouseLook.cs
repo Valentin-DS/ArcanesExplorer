@@ -68,13 +68,13 @@ public class mouseLook : MonoBehaviour
     int layerMaskRegenFaim = 1 << 14;
     int layerMaskRegenSoif = 1 << 15;
     int layerMaskRegenSommeil = 1 << 16;
-    int layerMaskGround = 1 << 10;
+    public static int layerMaskGround = 1 << 10;
     int layerMask = 1 << 11;
     int layerMaskTemple = 1 << 12;
     void Start()
     {
         startTime = Time.time;
-       // Cursor.visible = false;
+        // Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         BruitageRotationColonne = GetComponent<AudioSource>();
     }
@@ -176,9 +176,12 @@ public class mouseLook : MonoBehaviour
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            playerBody.Rotate(Vector3.up * mouseX);
-            
+            if (!Inventaire_Book_Manager.Instance.canvas_Inventaire.activeInHierarchy && !Craft_Book_Manager.Instance.canvas_Craft.activeInHierarchy)
+            {
+                transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                playerBody.Rotate(Vector3.up * mouseX);
+            }
+
         }
         //En train de build
         else
@@ -188,7 +191,6 @@ public class mouseLook : MonoBehaviour
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
         }

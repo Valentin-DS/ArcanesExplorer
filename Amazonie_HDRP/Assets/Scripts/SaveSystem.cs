@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 
 public static class SaveSystem
 {
@@ -29,6 +30,9 @@ public static class SaveSystem
             SanteJoueur.Instance.Nourriture = data.playerFood;
             SanteJoueur.Instance.Eau = data.playerWater;
             SanteJoueur.Instance.Repos = data.playerRest;
+            MissionGUI.Instance.MissionNumber = data.currentMissionNumber;
+            MissionGUI.Instance.Missions[MissionGUI.Instance.MissionNumber].GoalsAchievement = data.goals.ToList();
+            MissionGUI.Instance.UpdatePanel();
             PlayerMovement.Instance.transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
             for (int i = 0; i < data.ingredients.Length; i++)
             {

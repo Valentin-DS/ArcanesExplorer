@@ -176,6 +176,7 @@ public class Day_Night_Cycle : MonoBehaviour
             if (!stop_degrade)
             {
                 float fracJourney = 1 - (0.875f - currentTimeOfDay) / 0.25f;
+
                 test.top.value = Color.Lerp(color_Day_Top, color_Night_Top, fracJourney);
                 test.middle.value = Color.Lerp(color_Day_Middle, color_Night_Middle, fracJourney);
                 test.bottom.value = Color.Lerp(color_Day_Bottom, color_Night_Bottom, fracJourney);
